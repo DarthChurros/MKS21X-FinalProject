@@ -276,4 +276,33 @@
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
   </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>256</x>
+      <y>216</y>
+      <w>160</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>BookCipher
+--
+- randgen : Random
+--
++ BookCipher(int, String)
++ encrypt(String) : String
+- encryptChar(char) : char
++ decrypt(String) : String</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>328</x>
+      <y>168</y>
+      <w>192</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>220.0;10.0;10.0;10.0;10.0;60.0</additional_attributes>
+  </element>
 </diagram>
