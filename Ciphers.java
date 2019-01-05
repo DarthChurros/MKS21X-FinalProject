@@ -11,31 +11,42 @@ public class Ciphers {
         case "BookCipher": cipherObject = new BookCipher(args[2], args[3]);
                            break;//int then filename
         default : System.out.println("Sorry, you're requested cipher does not require a # and keyword");
-                  break;
+                           break;
       }
     }//do switch statment for rest of things
     if (args.length() == 4){
       switch (typeCipher) {
         case "BookCipher" : System.out.println("You must specify a # and filename");
-                            break;
-        case "VigenereCipher" : cipherObject = new VigenereCipher(args[2]);
                                 break;
-        case "AutokeyCipher" : cipherObject = new AutokeyCipher(args[2]);
-                               break;
+        case "VigenereCipher" : cipherObject = new VigenereCipher(args[2]); //args[2] must be a string
+                                break;
+        case "AutokeyCipher" : cipherObject = new AutokeyCipher(args[2]);  // ^
+                                break;
+        case "NihilistCipher" : cipherObject = new NihilistCipher(args[2]); // ^
+                                break;
+        case "PlayfairCipher" : cipherObject = new PlayfairCipher(args[2]);
+                                break;
+        case "CaesarCipher" : if (isNumeric(args[2])){ //in actual classes, there will be exception handling
+                                  cipherObject = new CaesarCipher(Integer.parseInt(args[2]));
+                              }else{
+                                  System.out.println("CaesarCipher requires a numeric input");
+                              } // this has a #
+                              break;
+        case "VICCipher" : if (isNumeric(args[2])){
+                                  cipherObject = new VICCipher(Integer.parseInt(args[2]));
+                              }else{
+                                  System.out.println("VICCipher requires a numeric input");
+                              } // ^
+                              break;
+        default : System.out.println("Sorry, invalid cipher requested");
       }
     }
-    //3rd parameter should be the key or keyword
-    //check to see if it's a # (this is from stackoverflow :/)
-    /**
-    if (isNumeric(args[2])){
-      cipherObject.setKey(Integer.parseInt(args[2])); //this is either for encryption or decryption?
-    }else{ //ig if encryption is chosen we can have this be literally the amount we are shifting by,
-      cipherObject.setKeyWord(args[2]); //or have some other meaning. for decryption, it is the # that the text was shifted by... i now understand that either way it's the same...
-    }
-    **/
-    //maybe there needs to be a keyword and and a key. if args length = 5, that means
-    //there is a keyword specified after the # (# shld come first)
-
+    if (args[args.length].equals("decrypt")){
+      System.out.println("Decrypted text: " + cipherObject.decrypt(text));
+    }else if (args[args.length].equals("encrypt")){
+      System.out.println("Encrypted text: " + cipherObject.encrypt(text));
+    }else{
+      System.out.println("Please rerun program and specify whether to decrypt or encrypt");
     }
   }
   //from stackoverflow. uses regex to check if arg is a #
