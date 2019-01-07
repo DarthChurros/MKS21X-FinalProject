@@ -8,7 +8,7 @@ public class Ciphers {
     Cipher cipherObject;
     if (args.length() == 5){ //means there will be both key and keyword specified
       switch (typeCipher) {
-        case "BookCipher": cipherObject = new BookCipher(args[2], args[3]);
+        case "BookCipher": // cipherObject = new BookCipher(args[2], args[3]);
                            break;//int then filename
         default : System.out.println("Sorry, you're requested cipher does not require a # and keyword");
                            break;
@@ -18,22 +18,22 @@ public class Ciphers {
       switch (typeCipher) {
         case "BookCipher" : System.out.println("You must specify a # and filename");
                                 break;
-        case "VigenereCipher" : cipherObject = new VigenereCipher(args[2]); //args[2] must be a string
+        case "VigenereCipher" : // cipherObject = new VigenereCipher(args[2]); //args[2] must be a string
                                 break;
-        case "AutokeyCipher" : cipherObject = new AutokeyCipher(args[2]);  // ^
+        case "AutokeyCipher" : // cipherObject = new AutokeyCipher(args[2]);  // ^
                                 break;
-        case "NihilistCipher" : cipherObject = new NihilistCipher(args[2]); // ^
+        case "NihilistCipher" : // cipherObject = new NihilistCipher(args[2]); // ^
                                 break;
-        case "PlayfairCipher" : cipherObject = new PlayfairCipher(args[2]);
+        case "PlayfairCipher" : // cipherObject = new PlayfairCipher(args[2]);
                                 break;
         case "CaesarCipher" : if (isNumeric(args[2])){ //in actual classes, there will be exception handling
-                                  cipherObject = new CaesarCipher(Integer.parseInt(args[2]));
+                                  // cipherObject = new CaesarCipher(Integer.parseInt(args[2]));
                               }else{
                                   System.out.println("CaesarCipher requires a numeric input");
                               } // this has a #
                               break;
         case "VICCipher" : if (isNumeric(args[2])){
-                                  cipherObject = new VICCipher(Integer.parseInt(args[2]));
+                                  // cipherObject = new VICCipher(Integer.parseInt(args[2]));
                               }else{
                                   System.out.println("VICCipher requires a numeric input");
                               } // ^
