@@ -15,3 +15,6 @@ Further clarified class structure
 -wiifit
 
 Jan 7, 2018:
+We realized errors in out class structure in class, so we are adding constructors
+to each abstract class and then will start writing the actual methods
+
