@@ -6,8 +6,12 @@ The other is mainMethod by Alma. Tomorrow we plan to refine these branches and b
 Caesar cipher.
 -wiifit
 
-Jan 7, 2018:
+Jan 6, 2018:
 The class structure for the ciphers is laid out as far as necessary. Abstract classes are
 complete - branch ClassStructure has been merged. Will take out a branch soon to work
 on a random simple substitution cipher. Caesar cipher will follow.
+ALMA: finished the mainMethod and switched all if/then statements to switch statements
+Further clarified class structure
 -wiifit
+
+Jan 7, 2018:
