@@ -1,7 +1,7 @@
 import java.util.Random;
 import java.lang.Math;
 public class SubCipher extends PolySubCipher{
-  public SubCipher(){
+  public SubCipher1(){
     //keyGrid must be filled from A to Z. so there is length 26 and only 1 row
     //for keyGrid[0], = 65 + randomObject.nextInt() % 26. For keyGrid[1], as long as keyGrid
     //doesn't already have this letter, it's ok
@@ -9,18 +9,17 @@ public class SubCipher extends PolySubCipher{
     key = randomObject.nextInt(); //key from Cipher.java
     Random rng = new Random(key);
     keyGrid = new char[1][26];
+    String letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     for (int i = 0; i<26; i++){
       int randNum = Math.abs(rng.nextInt());
-      keyGrid[0][i] = (char) ('A' + randNum%26);
+      //set random index of letters to the keygrid, then remove that letter from array and do from rand#%26 to rand#%25...
+      keyGrid[0][i] = letters.charAt(randNum%(26-i));
+      letters = letters.substring(0, randNum%(26-i)) + letters.substring(randNum%(26-i)+1, letters.length());
+      //remove is n2... find better solution
+      //solution I think was to use strings
+    }
 
-      for (int j = i; j>=0; j--){
-        if (keyGrid[0][j] == keyGrid[0][]){
-          randNum++;
-          keyGrid[0][i] = (char) ('A' + randNum%26);
-        }
-      }
-
-    } //to decrypt, you can't use this! you have to use constructor that specifies
+    //to decrypt, you can't use this! you have to use constructor that specifies
   } //shift amount. bc it has key variable to re-modify values
   public SubCipher(int shiftAmount){
     key = shiftAmount;
