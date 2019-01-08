@@ -1,7 +1,7 @@
 import java.util.Random;
 import java.lang.Math;
 public class SubCipher extends PolySubCipher{
-  public SubCipher1(){
+  public SubCipher(){
     //keyGrid must be filled from A to Z. so there is length 26 and only 1 row
     //for keyGrid[0], = 65 + randomObject.nextInt() % 26. For keyGrid[1], as long as keyGrid
     //doesn't already have this letter, it's ok
