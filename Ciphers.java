@@ -4,9 +4,9 @@ public class Ciphers {
     //args[0] == type of cipher. args[1] is text to be encrypted args[2] is key/keword, if there
     //are 5 args then args[3] is keyword to go along with # key. the last arg is whether to encrypt or decrypt
     String typeCipher = args[0];
-    String text = args[1]
+    String text = args[1];
     Cipher cipherObject;
-    if (args.length() == 5){ //means there will be both key and keyword specified
+    if (args.length == 5){ //means there will be both key and keyword specified
       switch (typeCipher) {
         case "BookCipher": // cipherObject = new BookCipher(args[2], args[3]);
                            break;//int then filename
@@ -14,7 +14,7 @@ public class Ciphers {
                            break;
       }
     }//do switch statment for rest of things
-    if (args.length() == 4){
+    if (args.length == 4){
       switch (typeCipher) {
         case "BookCipher" : System.out.println("You must specify a # and filename");
                                 break;
@@ -39,6 +39,7 @@ public class Ciphers {
                               } // ^
                               break;
         default : System.out.println("Sorry, invalid cipher requested");
+                  System.exit(1);
       }
     }
     if (args[args.length].equals("decrypt")){
