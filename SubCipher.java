@@ -14,15 +14,8 @@ public class SubCipher extends PolySubCipher{
     }
 
     //to decrypt, you can't use this! you have to use constructor that specifies
-  } //shift amount. bc it has key variable to re-modify values
+  //shift amount. bc it has key variable to re-modify values
   //this is actually for caesar!
-  public SubCipher(int shiftAmount){
-    key = shiftAmount;
-    keyGrid = new char[1][26];
-    for (int i = 0; i<26; i++){
-      keyGrid[0][i] = (char) ('A' + (i+shiftAmount)%26);
-    }
-  }
   public String encrypt(String plaintext){
     plaintext = plaintext.toUpperCase();
     //convert charAts to ascii #s, -65 so to get range from 0 to 25. these indexes are
