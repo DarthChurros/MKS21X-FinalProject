@@ -3,6 +3,19 @@ import java.lang.Math;
 import java.lang.IllegalStateException;
 
 public class SubCipher extends PolySubCipher{
+  /**
+  public static void main(String[] args){
+    SubCipher sc = new SubCipher(Integer.parseInt(args[0]));
+    System.out.println("Encrypted message: " + sc.encrypt(args[1]));
+    System.out.println("Decrypted message: " + sc.decrypt(sc.encrypt(args[1])));
+    System.out.println("Testing if key works twice in a row: ");
+    SubCipher sc1 = new SubCipher(Integer.parseInt(args[0]));
+    System.out.println("Encrypted message: " + sc1.encrypt(args[1]));
+    System.out.println("Decrypted message: " + sc1.decrypt(sc1.encrypt(args[1])));
+    System.out.println("Testing if key works twice in a row: ");
+  }
+  **/
+  private Random rng;
   public SubCipher(int k){
     //keyGrid must be filled from A to Z. so there is length 26 and only 1 row
     //for keyGrid[0], = 65 + randomObject.nextInt() % 26. For keyGrid[1], as long as keyGrid
@@ -10,7 +23,6 @@ public class SubCipher extends PolySubCipher{
     //Random randomObject = new Random(); //THESE LINES
     //key = randomObject.nextInt(); //ARE THE USER'S PROBLEM. USER HAS TO PROVIDE A KEY FOR THE RANDOM OBJECT
     super(k, ""); //k is key for random object
-    fillGrid();
     }
 
     //to decrypt, you can't use this! you have to use constructor that specifies
@@ -49,7 +61,8 @@ public class SubCipher extends PolySubCipher{
 
   protected char[][] genGrid(){
     if (getGrid() == null){
-      char[][] grod = new char[1][26]; //getGrid returns reference to array itself, so you have access to modifying it
+      rng = new Random(getKey());
+      char[][] grid = new char[1][26]; //getGrid returns reference to array itself, so you have access to modifying it
       String letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
       for (int i = 0; i<26; i++){
         int randNum = Math.abs(rng.nextInt());
