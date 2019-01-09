@@ -4,9 +4,6 @@ public class CaesarCipher extends PolySubCipher{
   public CaesarCipher(int k){
     super(k, ""); //k is the shift amount
     fillGrid();
-    for (int i = 0; i<26; i++){
-      getGrid()[0][i] = (char) ('A' + (i+getKey())%26); //can i use get grid here
-    }
   }
   public String encrypt(String plaintext){
     plaintext = plaintext.toUpperCase();
@@ -25,7 +22,7 @@ public class CaesarCipher extends PolySubCipher{
     for (int i = 0; i<ciphertext.length(); i++){
       char toAdd = 'A';
       for (int j = 0; j<26; j++){
-        if (keyGrid[0][j] == ciphertext.charAt(i)){
+        if (getGrid()[0][j] == ciphertext.charAt(i)){
           toAdd += j; //remember, j is position of original letter in alphabet
         }
       }
@@ -36,10 +33,10 @@ public class CaesarCipher extends PolySubCipher{
 
   protected char encryptChar(char c){
     int index = (int) c - 65;
-    return keyGrid[0][index];
+    return getGrid[0][index];
   }
-  
-  protected void fillGrid() throws IllegalStateException(){
+
+  protected void fillGrid(){
     if (getGrid() == null){
       getGrid() = new char[1][26]; //getGrid returns reference to array itself, so you have access to modifying it
       for (int i = 0; i<26; i++){

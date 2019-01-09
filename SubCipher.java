@@ -40,7 +40,7 @@ public class SubCipher extends PolySubCipher{
     for (int i = 0; i<ciphertext.length(); i++){
       char toAdd = 'A';
       for (int j = 0; j<26; j++){
-        if (keyGrid[0][j] == ciphertext.charAt(i)){
+        if (getGrid()[0][j] == ciphertext.charAt(i)){
           toAdd += j; //remember, j is position of original letter in alphabet
         }
       }
@@ -51,10 +51,10 @@ public class SubCipher extends PolySubCipher{
 
   protected char encryptChar(char c){
     int index = (int) c - 65;
-    return keyGrid[0][index];
+    return getGrid()[0][index];
   }
 
-  protected void fillGrid() throws IllegalStateException(){
+  protected void fillGrid(){
     if (getGrid() == null){
       getGrid() = new char[1][26]; //getGrid returns reference to array itself, so you have access to modifying it
       String letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
