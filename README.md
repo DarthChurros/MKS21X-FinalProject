@@ -19,3 +19,8 @@ We realized errors in out class structure in class, so we are adding constructor
 to each abstract class and then will start writing the actual methods
 
 NIGHT UPDATE: started substitution cipher, having trouble with random jumbling of letters but shiftKey works fine --alma
+
+Jan 8, 2018:
+Tejas fixes super conflicts
+Alma wrote substitutioncipher and caesar cipher, will have to adjust them according to new class structure
+
