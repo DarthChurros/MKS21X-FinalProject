@@ -5,9 +5,10 @@ public abstract class PolySubCipher extends Cipher{
   public PolySubCipher(int keyNum, String keyStr) {
     super(keyNum, keyStr);
     counter = 0;
+    keyGrid = genGrid();
   }
 
-  protected abstract void fillGrid();
+  protected abstract char[][] genGrid();
 
   protected abstract char encryptChar(char plain);
 
