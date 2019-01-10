@@ -3,6 +3,7 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Random;
+//import java.util.Math;
 public class BookCipher extends Cipher{
   private Random randgen;
   ArrayList<Character> charList;
@@ -28,9 +29,10 @@ public class BookCipher extends Cipher{
     }
   }
 
-  private Integer encryptChar(char c){
+  private Integer encryptChar(char c){ //should have it roll over, not just automatically give the highest index when amountIters > amountof times it shows up
     ArrayList<Character> charListCopy = new ArrayList<Character>(charList);
-    int amountIters = randgen.nextInt();
+    int amountIters = Math.abs(randgen.nextInt() % 1000);
+    //System.out.println("Encrypting: " + c + " amountIters: " + amountIters);
     if (!charListCopy.contains(c)){
       return -1;
     }else{
@@ -48,7 +50,8 @@ public class BookCipher extends Cipher{
 
   public String encrypt(String plaintext){
     String pt = plaintext;
-    String puncString = ",.!?()/\";\':-"; //get rid of punctuation
+    String ct = "";
+    String puncString = ",.!?()/\";\':- "; //get rid of punctuation
     for (int i = 0; i<pt.length(); i++){
         pt = pt.trim();
         for (int k = 0; k<puncString.length(); k++){
@@ -57,14 +60,20 @@ public class BookCipher extends Cipher{
         }
         pt = pt.toUpperCase();
     }
+    System.out.println("removed punctuation");
+    System.out.println("current plaintext: " + pt);
     for (int j = 0; j<pt.length(); j++){
       if (pt.substring(j, j+1).equals(" ")){
-        pt = pt; //don't change it. i know this is redundant but it makes it more clear
+        ct = ct; //don't change it. i know this is redundant but it makes it more clear
       }else{
-        pt = pt.substring(0,j) + encryptChar(pt.charAt(j)) + pt.substring(j+1, pt.length()); //keep reassigning pt to being itself w current int encrypted
+        System.out.println("Encrypting " + pt.charAt(j));
+        Integer nC = encryptChar(pt.charAt(j)); //newChar == encrypted
+        System.out.println("When encrypted, looks like: " + nC);
+        ct = ct + " " + nC; //keep reassigning pt to being itself w current int encrypted
+        System.out.println("ct now looks like: " + ct);
       }
     }
-    return pt;
+    return ct;
   }
 
   public String decrypt(String ciphertext){
@@ -74,6 +83,7 @@ public class BookCipher extends Cipher{
   public static void main(String[] args){
     try{
       BookCipher nbc = new BookCipher(23, "BookCipherText.txt");
+      System.out.println("Constructor done");
       System.out.println(nbc.encrypt("ABCDEFGHIJKLMNOPQRSTUVWXYZ hi hello"));
     }catch(FileNotFoundException e){
       System.out.println("File not found");
