@@ -48,6 +48,11 @@ public class BookCipher extends Cipher{
     }
   }
 
+  private char decryptInt(String s){
+    int index = Integer.parseInt(s);
+    return charList.get(index);
+  }
+
   public String encrypt(String plaintext){
     String pt = plaintext;
     String ct = "";
@@ -69,7 +74,7 @@ public class BookCipher extends Cipher{
         System.out.println("Encrypting " + pt.charAt(j));
         Integer nC = encryptChar(pt.charAt(j)); //newChar == encrypted
         System.out.println("When encrypted, looks like: " + nC);
-        ct = ct + " " + nC; //keep reassigning pt to being itself w current int encrypted
+        ct += nC + " "; //keep reassigning pt to being itself w current int encrypted
         System.out.println("ct now looks like: " + ct);
       }
     }
@@ -77,7 +82,13 @@ public class BookCipher extends Cipher{
   }
 
   public String decrypt(String ciphertext){
-    return "dec";
+    /*
+    String tempText = ciphertext;
+    while (tempText.length() > 0){
+      String intToProcess = tempText
+    }
+    */
+    return "g";
   }
 
   public static void main(String[] args){
