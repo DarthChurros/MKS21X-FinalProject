@@ -65,17 +65,17 @@ public class BookCipher extends Cipher{
         }
         pt = pt.toUpperCase();
     }
-    System.out.println("removed punctuation");
-    System.out.println("current plaintext: " + pt);
+    //System.out.println("removed punctuation");
+    //System.out.println("current plaintext: " + pt);
     for (int j = 0; j<pt.length(); j++){
       if (pt.substring(j, j+1).equals(" ")){
         ct = ct; //don't change it. i know this is redundant but it makes it more clear
       }else{
-        System.out.println("Encrypting " + pt.charAt(j));
+        //System.out.println("Encrypting " + pt.charAt(j));
         Integer nC = encryptChar(pt.charAt(j)); //newChar == encrypted
-        System.out.println("When encrypted, looks like: " + nC);
+        //System.out.println("When encrypted, looks like: " + nC);
         ct += nC + " "; //keep reassigning pt to being itself w current int encrypted
-        System.out.println("ct now looks like: " + ct);
+        //System.out.println("ct now looks like: " + ct);
       }
     }
     return ct;
@@ -96,9 +96,9 @@ public class BookCipher extends Cipher{
   public static void main(String[] args){
     try{
       BookCipher nbc = new BookCipher(23, "BookCipherText.txt");
-      System.out.println("Constructor done");
+      //System.out.println("Constructor done");
       String encrypted = nbc.encrypt("ABCDEFGHIJKLMNOPQRSTUVWXYZ hi hello");
-      System.out.println(encrypted);
+      System.out.println("Encrypted: " + encrypted);
       String decrypted = nbc.decrypt(encrypted);
       System.out.println("Decrypt: " + decrypted);
     }catch(FileNotFoundException e){
