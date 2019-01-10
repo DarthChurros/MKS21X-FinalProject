@@ -13,13 +13,13 @@ public class BookCipher extends Cipher{
     File f = new File(getKeyword());
     Scanner in = new Scanner(f);
     charList = new ArrayList<Character>();
-    String puncString = ",.!?()/\";\':-";
+    String puncString = ",.!?()/\";\':-"; //get rid of punctuation
     while (in.hasNext()){
         String word = in.next();
         word = word.trim();
         for (int i = 0; i<puncString.length(); i++){
           String punc = puncString.substring(i,i+1);
-          word = word.replace(punc, "");
+          word = word.replace(punc, ""); //this is a long process, i hope it is ok
         }
         word = word.toUpperCase();
         for (int i = 0; i<word.length(); i++){
@@ -28,8 +28,22 @@ public class BookCipher extends Cipher{
     }
   }
 
-  private char encryptChar(char c){
-    return '';
+  private Integer encryptChar(char c){
+    ArrayList<Character> charListCopy = new ArrayList<Character>(charList);
+    int amountIters = randgen.nextInt();
+    if (!charListCopy.contains(c)){
+      return '!';
+    }else{
+      Integer tempIndex = 0;
+      for (int i = 0; i<amountIters; i++){
+        index = charListCopy.indexOf(c);
+        if (index != -1){ //will return -1 if no longer present
+          tempIndex = index;
+          charListCopy.set(tempIndex, '!');
+        }
+      }
+      return tempIndex;
+    }
   }
 
   public String encrypt(String plaintext){
