@@ -24,3 +24,11 @@ Jan 8, 2018:
 Tejas fixes super conflicts
 Alma wrote substitutioncipher and caesar cipher, will have to adjust them according to new class structure
 
+Jan 9, 2018:
+Tejas beings on vignere cipher
+alma adjust substitution and caesar
+
+jan 10, 2018:
+tejas finishes vignere
+alma begins bookcipher, runtime very very slow. has to look into using string instead of arraLyist to hold data perhas
+or for quicker way to scan through very long list of chars. difficult
