@@ -82,20 +82,25 @@ public class BookCipher extends Cipher{
   }
 
   public String decrypt(String ciphertext){
-    /*
     String tempText = ciphertext;
+    String plainText = "";
     while (tempText.length() > 0){
-      String intToProcess = tempText
+      int indexSpace = tempText.indexOf(" ");
+      Integer intToProcess = Integer.parseInt(tempText.substring(0, indexSpace));
+      tempText = tempText.substring(indexSpace+1, tempText.length());
+      plainText += charList.get(intToProcess);
     }
-    */
-    return "g";
+    return plainText;
   }
 
   public static void main(String[] args){
     try{
       BookCipher nbc = new BookCipher(23, "BookCipherText.txt");
       System.out.println("Constructor done");
-      System.out.println(nbc.encrypt("ABCDEFGHIJKLMNOPQRSTUVWXYZ hi hello"));
+      String encrypted = nbc.encrypt("ABCDEFGHIJKLMNOPQRSTUVWXYZ hi hello");
+      System.out.println(encrypted);
+      String decrypted = nbc.decrypt(encrypted);
+      System.out.println("Decrypt: " + decrypted);
     }catch(FileNotFoundException e){
       System.out.println("File not found");
     }
