@@ -32,11 +32,11 @@ public class BookCipher extends Cipher{
     ArrayList<Character> charListCopy = new ArrayList<Character>(charList);
     int amountIters = randgen.nextInt();
     if (!charListCopy.contains(c)){
-      return '!';
+      return -1;
     }else{
       Integer tempIndex = 0;
       for (int i = 0; i<amountIters; i++){
-        index = charListCopy.indexOf(c);
+        Integer index = charListCopy.indexOf(c);
         if (index != -1){ //will return -1 if no longer present
           tempIndex = index;
           charListCopy.set(tempIndex, '!');
@@ -47,17 +47,34 @@ public class BookCipher extends Cipher{
   }
 
   public String encrypt(String plaintext){
-    return "enc";
-  };
+    String pt = plaintext;
+    String puncString = ",.!?()/\";\':-"; //get rid of punctuation
+    for (int i = 0; i<pt.length(); i++){
+        pt = pt.trim();
+        for (int k = 0; k<puncString.length(); k++){
+          String punc = puncString.substring(k,k+1);
+          pt = pt.replace(punc, ""); //this is a long process, i hope it is ok
+        }
+        pt = pt.toUpperCase();
+    }
+    for (int j = 0; j<pt.length(); j++){
+      if (pt.substring(j, j+1).equals(" ")){
+        pt = pt; //don't change it. i know this is redundant but it makes it more clear
+      }else{
+        pt = pt.substring(0,j) + encryptChar(pt.charAt(j)) + pt.substring(j+1, pt.length()); //keep reassigning pt to being itself w current int encrypted
+      }
+    }
+    return pt;
+  }
 
   public String decrypt(String ciphertext){
     return "dec";
-  };
+  }
 
   public static void main(String[] args){
     try{
       BookCipher nbc = new BookCipher(23, "BookCipherText.txt");
-      System.out.println(nbc.charList);
+      System.out.println(nbc.encrypt("ABCDEFGHIJKLMNOPQRSTUVWXYZ hi hello"));
     }catch(FileNotFoundException e){
       System.out.println("File not found");
     }
