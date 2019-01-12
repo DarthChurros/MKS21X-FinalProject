@@ -101,6 +101,13 @@ public class BookCipher extends Cipher{
       System.out.println("Encrypted: " + encrypted);
       String decrypted = nbc.decrypt(encrypted);
       System.out.println("Decrypt: " + decrypted);
+      System.out.println("Seeing if the same key gives the same encryption and decryption");
+      BookCipher nbc1 = new BookCipher(23, "BookCipherText.txt");
+      //System.out.println("Constructor done");
+      String encrypted1 = nbc1.encrypt("ABCDEFGHIJKLMNOPQRSTUVWXYZ hi hello");
+      System.out.println("Encrypted: " + encrypted1);
+      String decrypted1 = nbc1.decrypt(encrypted1);
+      System.out.println("Decrypt: " + decrypted1);
     }catch(FileNotFoundException e){
       System.out.println("File not found");
     }
