@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.Arrays;
 
 public class Demo {
   public static void main(String[] args) {
@@ -10,7 +11,23 @@ public class Demo {
     System.out.println("\t[3] Vigenere Cipher\n");
 
     switch (in.next()) {
-      
+      case "1":
+        System.out.println("\nSelect a randomization key for this substitution cipher!\n");
+        util = new SubCipher(Integer.parseInt(in.next()));
+        break;
+      case "2":
+        System.out.println("\nSelect a shift key for this Caesar cipher!\n");
+        util = new CaesarCipher(Integer.parseInt(in.next()));
+        break;
+      case "3":
+        System.out.println("\nSelect a key for this Vigenere cipher!\n");
+        util = new VigenereCipher(in.next());
+        break;
+      default:
+        System.out.println("Invalid cipher option! QUITTING");
+        util = new SubCipher(0);
+        System.exit(1);
     }
+    System.out.println(util.encrypt("hello"));
   }
 }

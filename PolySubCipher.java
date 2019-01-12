@@ -19,4 +19,12 @@ public abstract class PolySubCipher extends Cipher{
   protected int counter() {
     return counter;
   }
+
+  protected void iter() {
+    counter = (counter + 1) % keyGrid.length;
+  }
+
+  protected void reset() {
+    counter = 0;
+  }
 }
