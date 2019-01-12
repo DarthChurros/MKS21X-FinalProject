@@ -32,3 +32,10 @@ jan 10, 2018:
 tejas finishes vignere
 alma begins bookcipher, runtime very very slow. has to look into using string instead of arraLyist to hold data perhas
 or for quicker way to scan through very long list of chars. difficult
+
+jan 11, 2018:
+alma fixes slow runtime for bookcipher. The problem was actually how the ciphertext 
+was being processed and there was an infinite loop as adding '-1' meant 1 kept being
+procdssed over and over
+
+jan 12, 2018:
