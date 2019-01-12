@@ -34,8 +34,11 @@ alma begins bookcipher, runtime very very slow. has to look into using string in
 or for quicker way to scan through very long list of chars. difficult
 
 jan 11, 2018:
-alma fixes slow runtime for bookcipher. The problem was actually how the ciphertext 
+alma fixes slow runtime for bookcipher. The problem was actually how the ciphertext
 was being processed and there was an infinite loop as adding '-1' meant 1 kept being
-procdssed over and over
+processed over and over
 
 jan 12, 2018:
+tejas fixes a fatal bug in vigenere which assumed that Arrays.indexOf() existed,
+and another with an accidental repeat increment variable. tested the demo file,
+and it works so far. plan to add more customizability later in the day.
