@@ -39,6 +39,5 @@ was being processed and there was an infinite loop as adding '-1' meant 1 kept b
 processed over and over
 
 jan 12, 2018:
-tejas fixes a fatal bug in vigenere which assumed that Arrays.indexOf() existed,
-and another with an accidental repeat increment variable. tested the demo file,
+tejas fixes several fatal bugs in vigenere. tested the demo file,
 and it works so far. plan to add more customizability later in the day.
