@@ -24,10 +24,29 @@ public class Demo {
         util = new VigenereCipher(in.next());
         break;
       default:
-        System.out.println("Invalid cipher option! QUITTING");
         util = new SubCipher(0);
-        System.exit(1);
+        quit();
     }
-    System.out.println(util.encrypt("hello"));
+    System.out.println("\nSelect a function: \n");
+    System.out.println("\t[1] Encryption");
+    System.out.println("\t[2] Decryption\n");
+
+    switch(in.next()) {
+      case "1":
+        System.out.println("Enter your plaintext: ");
+        System.out.println("\nCiphertext: " + util.encrypt(in.next()));
+        break;
+      case "2":
+        System.out.println("Enter your ciphertext: ");
+        System.out.println("\nPlaintext: " + util.decrypt(in.next()));
+        break;
+      default:
+        quit();
+    }
+  }
+
+  public static void quit() {
+    System.out.println("Invalid selection! QUITTING");
+    System.exit(1);
   }
 }
