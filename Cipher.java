@@ -7,9 +7,9 @@ public abstract class Cipher {
     keyword = keyStr;
   }
 
-  public abstract String encrypt(String plaintext);
+  //public abstract String encrypt(String plaintext);
 
-  public abstract String decrypt(String ciphertext);
+  //public abstract String decrypt(String ciphertext);
 
   public int getKey() {
     return key;
