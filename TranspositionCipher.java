@@ -1,3 +1,4 @@
+import java.util.Arrays;
 abstract class TranspositionCipher extends Cipher{
   private char[][] keyGrid;
   public TranspositionCipher(int k, String text){
@@ -10,5 +11,13 @@ abstract class TranspositionCipher extends Cipher{
 
   protected char[][] getGrid(){
       return keyGrid;
+  }
+
+  protected char[][] getCopyOfGrid(){
+    char[][] toReturn = new char[getKey()][keyGrid[0].length];
+    for (int i = 0; i<getKey(); i++){
+      toReturn[i] = Arrays.copyOf(getGrid()[i], keyGrid[0].length);
+    }
+    return toReturn;
   }
 }

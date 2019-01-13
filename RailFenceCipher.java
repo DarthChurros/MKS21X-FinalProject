@@ -10,30 +10,49 @@ public class RailFenceCipher extends TranspositionCipher{
   public static void main(String[] args){
     RailFenceCipher a = new RailFenceCipher(3, "THEUNITEDKINGDOM");
     //a.encrypt("THEUNITEDKINGDOM");
-    System.out.println(a.encrypt("THEUNITEDKINGDOM"));
+    System.out.println(a.getKey() + ", " + a.encrypt("THEUNITEDKINGDOM"));
+    RailFenceCipher a1 = new RailFenceCipher(4, "THEUNITEDKINGDOM");
+    //a.encrypt("THEUNITEDKINGDOM");
+    System.out.println(a1.getKey() + ", " + a1.encrypt("THEUNITEDKINGDOM"));
+    RailFenceCipher a2 = new RailFenceCipher(5, "THEUNITEDKINGDOM");
+    //a.encrypt("THEUNITEDKINGDOM");
+    System.out.println(a2.getKey() + ", " + a2.encrypt("THEUNITEDKINGDOM"));
+    RailFenceCipher a3 = new RailFenceCipher(6, "THEUNITEDKINGDOM");
+    //a.encrypt("THEUNITEDKINGDOM");
+    System.out.println(a3.getKey() + ", " + a3.encrypt("THEUNITEDKINGDOM"));
+    RailFenceCipher a4 = new RailFenceCipher(7, "THEUNITEDKINGDOM");
+    //a.encrypt("THEUNITEDKINGDOM");
+    System.out.println(a4.getKey() + ", " + a4.encrypt("THEUNITEDKINGDOM"));
+    System.out.println(a4.toStringGrid(a4.getGrid()));
+  // the above proves that getGrid needs to return just a copy bc grid is immutable
   }
-  public String encrypt(String plaintext){
+
+  private char[][] makeGrid(char[][] orig, String plaintext){
     boolean passedAry = false;
-    //int i = 0;
-    char[][] tempGrid = getGrid();
+    char[][] tempGrid = getCopyOfGrid();
     int ary = -1;
     for(int i = 0; i<plaintext.length(); i++){
       if (!passedAry){
         //System.out.println("" + ary + ", " + plaintext.charAt(i));
         ary++;
         tempGrid[ary][i] = plaintext.charAt(i);
-        System.out.println("" + ary + ", " + plaintext.charAt(i));
+        //System.out.println("" + ary + ", " + plaintext.charAt(i));
       }
       if (passedAry){
         //System.out.println("" + ary + ", " + plaintext.charAt(i));
         ary--;
         tempGrid[ary][i] = plaintext.charAt(i);
-        System.out.println("" + ary + ", " + plaintext.charAt(i));
+        //System.out.println("" + ary + ", " + plaintext.charAt(i));
       }
       if ((i%distance == 0 && i != 0 )|| ary == getKey()-1){ //i%distance == 0 should happen when
         passedAry = !passedAry;
       }
     }
+    return tempGrid;
+  }
+
+  public String encrypt(String plaintext){
+    char[][] tempGrid = makeGrid(getGrid(), plaintext);
     String encrypted = "";
     for (int i = 0; i<getKey(); i++){
       for (int k = 0; k<plaintext.length(); k++){
@@ -44,7 +63,37 @@ public class RailFenceCipher extends TranspositionCipher{
     }
     //return toStringGrid(tempGrid);
     //return toReturn;
-    return encrypted;
+    return encrypted + "\n" + toStringGrid(tempGrid);
+  }
+  public void decrypt(String ciphertext){
+    //make a variable which is startPoint which updates by -1 (in order of index in array) everytime
+    //you switch to a new array within the 2d one. For instance if the 'first' index in the last array is
+    //2 from the back, then the 'first' index in the second to last array is 3 from the back and so on.
+    char[][] tempGrid = makeGrid(getGrid(), ciphertext);
+
+    /*
+    char[][] tempGrid = getGrid();
+    int index = ciphertext.length()-1;
+    //int indAry = getKey() - 1;
+    //have a for loop for how manyarys there are. and then try to keep adding every index
+    //from the ciphertext, once it fails bc the difference for that ary makes the position to add to
+    //out-of-bounds, then add 1 to the variable controlling the for loop that is counting the arrays
+    //still need to find a way to calculate where the char begins on first (last) array
+    //HOW TO DO THIS: JUST REMAKE THE GRID USING THE CIPHER TEXT AND LIKE TRACE OVER IT! MAKING grid
+    //only depends on length of text. reamking it will tell you where the last letter of the last arry is
+    //loctaed
+    for (int k = getKey()-1; k>=0; k--){
+      boolean canAdd = true;
+      while [canAdd]{
+        try{
+
+        }catch(IndexOutOfBoundsException e){
+          canAdd = false;
+        }
+      }
+    }
+    */
+    return "";
   }
   protected String toStringGrid(char[][] grid){
     String toReturn = "";
