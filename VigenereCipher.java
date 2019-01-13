@@ -2,25 +2,26 @@ import java.util.Arrays;
 public class VigenereCipher extends PolySubCipher {
 
   public VigenereCipher(String keyStr) {
-    super(0, keyStr);
+    super(keyStr.length(), keyStr);
   }
 
   protected char[][] genGrid() {
     if (getGrid() != null) {
       throw new IllegalStateException("Grid already initialized");
     }
-    char[][] grid = new char[getKeyword().length()][26];
+    char[][] grid = new char[getKey()][26];
     for (int i = 0; i < grid.length; i++) {
       for (int j = 0; j < 26; j++) {
-        grid[i][j] = (j + Character.toUpperCase(getKeyword().charAt(i)) - 'A') % 26 + 'A';
+        grid[i][j] = (char)((j + Character.toUpperCase(getKeyword().charAt(i)) - 'A') % 26 + 'A');
       }
     }
     return grid;
   }
 
   protected char encryptChar(char plain) {
+    char cipher = getGrid()[counter()][Character.toUpperCase(plain) - 'A'];
     iter();
-    return getGrid()[counter()][Character.toUpperCase(plain) - 'A'];
+    return cipher;
   }
 
   public String encrypt(String plaintext) {
@@ -29,14 +30,23 @@ public class VigenereCipher extends PolySubCipher {
     for(int i = 0; i < plaintext.length(); i++) {
       ciphertext += encryptChar(plaintext.charAt(i));
     }
+    return ciphertext;
   }
 
   public String decrypt(String ciphertext) {
     reset();
     String plaintext = "";
-    for (int i = 0; i < ciphertext.length(); i++) {
-        plaintext += Arrays.indexOf(getGrid()[counter()], Character.toUpperCase(ciphertext.charAt(i)));
+    for (int j = 0; j < ciphertext.length(); j++) {
+      int letter = 0;
+      for (int k = 0; k < 26; k++) {
+        if (getGrid()[counter()][k] == Character.toUpperCase(ciphertext.charAt(j))) {
+          letter = k;
+          k = 26;
+        }
+      }
+      plaintext += (char)('a' + letter);
+      iter();
     }
-    return plaintext.toUpperCase();
+    return plaintext;
   }
 }
