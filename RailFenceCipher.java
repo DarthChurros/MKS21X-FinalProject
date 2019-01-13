@@ -7,10 +7,11 @@ public class RailFenceCipher extends TranspositionCipher{
   }
   //first should be encrypte and decrypt, in both the plaintext or cipher text are specified
   //and then the grid can be made
+/*
   public static void main(String[] args){
-    RailFenceCipher a = new RailFenceCipher(3, "THEUNITEDKINGDOM");
+    RailFenceCipher a = new RailFenceCipher(3, "The United Kingdom");
     //a.encrypt("THEUNITEDKINGDOM");
-    String enc = a.encrypt("THEUNITEDKINGDOM");
+    String enc = a.encrypt("The United Kingdom");
     System.out.println(a.getKey() + ", " + enc);
     String dec = a.decrypt(enc);
     System.out.println(a.getKey() + ", " + dec);
@@ -40,11 +41,13 @@ public class RailFenceCipher extends TranspositionCipher{
     System.out.println(a4.getKey() + ", " + dec);
   // the above proves that getGrid needs to return just a copy bc grid is immutable
   }
-
+  */
   private char[][] makeGrid(char[][] orig, String plaintext){
     boolean passedAry = false;
     char[][] tempGrid = getCopyOfGrid();
     int ary = -1;
+    plaintext = plaintext.toUpperCase();
+    plaintext = plaintext.replace(" ", "");
     //System.out.println(plaintext.length());
     for(int i = 0; i<plaintext.length(); i++){
       if (!passedAry){
