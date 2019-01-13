@@ -34,8 +34,17 @@ public class RailFenceCipher extends TranspositionCipher{
         passedAry = !passedAry;
       }
     }
-    return toStringGrid(tempGrid);
+    String encrypted = "";
+    for (int i = 0; i<getKey(); i++){
+      for (int k = 0; k<plaintext.length(); k++){
+        if (tempGrid[i][k] != '-'){
+          encrypted += tempGrid[i][k];
+        }
+      }
+    }
+    //return toStringGrid(tempGrid);
     //return toReturn;
+    return encrypted;
   }
   protected String toStringGrid(char[][] grid){
     String toReturn = "";
