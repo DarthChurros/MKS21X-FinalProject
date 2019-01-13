@@ -10,20 +10,34 @@ public class RailFenceCipher extends TranspositionCipher{
   public static void main(String[] args){
     RailFenceCipher a = new RailFenceCipher(3, "THEUNITEDKINGDOM");
     //a.encrypt("THEUNITEDKINGDOM");
-    System.out.println(a.getKey() + ", " + a.encrypt("THEUNITEDKINGDOM"));
+    String enc = a.encrypt("THEUNITEDKINGDOM");
+    System.out.println(a.getKey() + ", " + enc);
+    String dec = a.decrypt(enc);
+    System.out.println(a.getKey() + ", " + dec);
+    //a1
     RailFenceCipher a1 = new RailFenceCipher(4, "THEUNITEDKINGDOM");
-    //a.encrypt("THEUNITEDKINGDOM");
-    System.out.println(a1.getKey() + ", " + a1.encrypt("THEUNITEDKINGDOM"));
+    enc = a1.encrypt("THEUNITEDKINGDOM");
+    System.out.println(a1.getKey() + ", " + enc);
+    //dec = a1.decrypt(enc);
+    //System.out.println(a1.getKey() + ", " + dec);
+    //a2
     RailFenceCipher a2 = new RailFenceCipher(5, "THEUNITEDKINGDOM");
-    //a.encrypt("THEUNITEDKINGDOM");
-    System.out.println(a2.getKey() + ", " + a2.encrypt("THEUNITEDKINGDOM"));
+    enc = a2.encrypt("THEUNITEDKINGDOM");
+    System.out.println(a2.getKey() + ", " + enc);
+    //dec = a2.decrypt(enc);
+    //System.out.println(a2.getKey() + ", " + dec);
+    //a3
     RailFenceCipher a3 = new RailFenceCipher(6, "THEUNITEDKINGDOM");
-    //a.encrypt("THEUNITEDKINGDOM");
-    System.out.println(a3.getKey() + ", " + a3.encrypt("THEUNITEDKINGDOM"));
+    enc = a3.encrypt("THEUNITEDKINGDOM");
+    System.out.println(a3.getKey() + ", " + enc);
+    //dec = a3.decrypt(enc);
+    //System.out.println(a3.getKey() + ", " + dec);
+    //a4
     RailFenceCipher a4 = new RailFenceCipher(7, "THEUNITEDKINGDOM");
-    //a.encrypt("THEUNITEDKINGDOM");
-    System.out.println(a4.getKey() + ", " + a4.encrypt("THEUNITEDKINGDOM"));
-    System.out.println(a4.toStringGrid(a4.getGrid()));
+    enc = a4.encrypt("THEUNITEDKINGDOM");
+    System.out.println(a4.getKey() + ", " + enc);
+    //dec = a4.decrypt(enc);
+    //System.out.println(a4.getKey() + ", " + dec);
   // the above proves that getGrid needs to return just a copy bc grid is immutable
   }
 
@@ -31,23 +45,25 @@ public class RailFenceCipher extends TranspositionCipher{
     boolean passedAry = false;
     char[][] tempGrid = getCopyOfGrid();
     int ary = -1;
+    System.out.println(plaintext.length());
     for(int i = 0; i<plaintext.length(); i++){
       if (!passedAry){
         //System.out.println("" + ary + ", " + plaintext.charAt(i));
         ary++;
         tempGrid[ary][i] = plaintext.charAt(i);
-        //System.out.println("" + ary + ", " + plaintext.charAt(i));
+      System.out.println("" + ary + ", " + plaintext.charAt(i));
       }
       if (passedAry){
         //System.out.println("" + ary + ", " + plaintext.charAt(i));
         ary--;
         tempGrid[ary][i] = plaintext.charAt(i);
-        //System.out.println("" + ary + ", " + plaintext.charAt(i));
+        System.out.println("" + ary + ", " + plaintext.charAt(i));
       }
       if ((i%distance == 0 && i != 0 )|| ary == getKey()-1){ //i%distance == 0 should happen when
         passedAry = !passedAry;
       }
     }
+    System.out.println(toStringGrid(tempGrid));
     return tempGrid;
   }
 
@@ -63,13 +79,33 @@ public class RailFenceCipher extends TranspositionCipher{
     }
     //return toStringGrid(tempGrid);
     //return toReturn;
-    return encrypted + "\n" + toStringGrid(tempGrid);
+    return encrypted; //+ "\n" + toStringGrid(tempGrid);
   }
-  public void decrypt(String ciphertext){
+  public String decrypt(String ciphertext){
     //make a variable which is startPoint which updates by -1 (in order of index in array) everytime
     //you switch to a new array within the 2d one. For instance if the 'first' index in the last array is
     //2 from the back, then the 'first' index in the second to last array is 3 from the back and so on.
     char[][] tempGrid = makeGrid(getGrid(), ciphertext);
+    int i = ciphertext.length()-1;
+    int arrayOn = getKey() - 1;
+    while (i>= 0){
+      for(int k = ciphertext.length()-1; k>=0; k--){
+        if (tempGrid[arrayOn][k] != '-'){
+          tempGrid[arrayOn][k] = ciphertext.charAt(i);
+          i--;
+        }
+      }
+      arrayOn--;
+    }
+    String decrypted = "";
+    for (int j = 0; j<getKey(); j++){
+      for (int l = 0; l<ciphertext.length(); l++){
+        if (tempGrid[j][l] != '-'){
+          decrypted += tempGrid[j][l];
+        }
+      }
+    }
+    return decrypted; //+ "\n" + toStringGrid(tempGrid);
 
     /*
     char[][] tempGrid = getGrid();
@@ -93,7 +129,7 @@ public class RailFenceCipher extends TranspositionCipher{
       }
     }
     */
-    return "";
+  //  return "";
   }
   protected String toStringGrid(char[][] grid){
     String toReturn = "";
