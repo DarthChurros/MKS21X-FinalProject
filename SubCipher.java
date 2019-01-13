@@ -29,23 +29,24 @@ public class SubCipher extends PolySubCipher{
   //shift amount. bc it has key variable to re-modify values
   //this is actually for caesar!
   public String encrypt(String plaintext){
-    plaintext = plaintext.toUpperCase();
+    String pt = processText(plaintext);
+    //System.out.println("pt: " + pt);
     //convert charAts to ascii #s, -65 so to get range from 0 to 25. these indexes are
     //what the new letters will be, as per the keyGrid
     String toReturn = "";
-    for (int i = 0; i<plaintext.length(); i++){
-      toReturn+=encryptChar(plaintext.charAt(i));
+    for (int i = 0; i<pt.length(); i++){
+      toReturn+=encryptChar(pt.charAt(i));
     }
     return toReturn;
   }
 
   public String decrypt(String ciphertext){ //this was is runtime n2, but works for random key
-    ciphertext = ciphertext.toUpperCase(); //maybe process this in public static void main(String[] args) {
+    String ct = processText(ciphertext); //maybe process this in public static void main(String[] args) {
     String toReturn = "";
-    for (int i = 0; i<ciphertext.length(); i++){
+    for (int i = 0; i<ct.length(); i++){
       char toAdd = 'A';
       for (int j = 0; j<26; j++){
-        if (getGrid()[0][j] == ciphertext.charAt(i)){
+        if (getGrid()[0][j] == ct.charAt(i)){
           toAdd += j; //remember, j is position of original letter in alphabet
         }
       }

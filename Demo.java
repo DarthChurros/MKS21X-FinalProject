@@ -33,12 +33,14 @@ public class Demo {
 
     switch(in.next()) {
       case "1":
+        in.nextLine();
         System.out.println("Enter your plaintext: ");
-        System.out.println("\nCiphertext: " + util.encrypt(in.next()));
+        System.out.println("\nCiphertext: " + util.encrypt(in.nextLine()));
         break;
       case "2":
+        in.nextLine();
         System.out.println("Enter your ciphertext: ");
-        System.out.println("\nPlaintext: " + util.decrypt(in.next()));
+        System.out.println("\nPlaintext: " + util.decrypt(in.nextLine()));
         break;
       default:
         quit();
