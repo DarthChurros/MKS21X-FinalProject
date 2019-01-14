@@ -7,30 +7,43 @@ public class Demo {
   public static void main(String[] args) {
     Scanner in = new Scanner(System.in);
     ArrayList<Cipher> ciphers = new ArrayList<Cipher>();
+    boolean run = true;
+    System.out.println("Welcome to the Wii Fit Cipher Service! To begin, please add your first cipher.\n");
     ciphers.add(initCipher(in));
-    System.out.println("\nSelect a function: \n");
-    System.out.println("\t[1] Encryption");
-    System.out.println("\t[2] Decryption\n");
+    while (run) {
+      System.out.println("\nYour ciphers: ");
+      for (int i = 0; i < ciphers.size(); i++) {
+        System.out.println("\t" + ciphers.get(i));
+      }
+      System.out.println("What would you like to do?\n");
+      System.out.println("\t[1] View ciphers");
+      System.out.println("\t[2] Add a cipher");
+      System.out.println("\t[3] Remove a cipher");
 
-    switch(in.next()) {
-      case "1":
-        in.nextLine();
-        System.out.println("Enter your plaintext: ");
-        System.out.println("\nCiphertext: " + ciphers.get(0).encrypt(in.nextLine()));
-        break;
-      case "2":
-        in.nextLine();
-        System.out.println("Enter your ciphertext: ");
-        System.out.println("\nPlaintext: " + ciphers.get(0).decrypt(in.nextLine()));
-        break;
-      default:
-        quit("Invalid selection! QUITTING");
+      System.out.println("\nSelect a function: \n");
+      System.out.println("\t[1] Encryption");
+      System.out.println("\t[2] Decryption\n");
+
+      switch(in.next()) {
+        case "1":
+          in.nextLine();
+          System.out.println("Enter your plaintext: ");
+          System.out.println("\nCiphertext: " + ciphers.get(0).encrypt(in.nextLine()));
+          break;
+        case "2":
+          in.nextLine();
+          System.out.println("Enter your ciphertext: ");
+          System.out.println("\nPlaintext: " + ciphers.get(0).decrypt(in.nextLine()));
+          break;
+        default:
+          quit("Invalid selection! QUITTING");
+      }
     }
   }
 
   public static Cipher initCipher(Scanner preset) {
     Cipher util;
-    System.out.println("Welcome to the Wii Fit Cipher Service! To begin, please select a cipher: \n");
+    System.out.println("Please select a cipher to add: \n");
     System.out.println("\t[1] Substitution Cipher");
     System.out.println("\t[2] Caesar Cipher");
     System.out.println("\t[3] Vigenere Cipher");

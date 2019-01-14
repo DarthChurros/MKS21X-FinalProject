@@ -5,11 +5,13 @@ import java.util.ArrayList;
 import java.util.Random;
 //import java.util.Math;
 public class BookCipher extends Cipher{
+
   private Random randgen;
   ArrayList<Character> charList;
   //VV will throw filenot found
   public BookCipher(int k, String t) throws FileNotFoundException{ //k can be key for rand num. t is name of text file
     super(k, t); //so keyword == filename and k == key
+    type = "Book Cipher";
     randgen = new Random(getKey()); //we will use this to encrypt
     File f = new File(getKeyword());
     Scanner in = new Scanner(f);
