@@ -70,10 +70,11 @@ public class RailFenceCipher extends TranspositionCipher{
   }
 
   public String encrypt(String plaintext){
-    char[][] tempGrid = makeGrid(getGrid(), plaintext);
+    String temp = processText(plaintext);
+    char[][] tempGrid = makeGrid(getGrid(), temp);
     String encrypted = "";
     for (int i = 0; i<getKey(); i++){
-      for (int k = 0; k<plaintext.length(); k++){
+      for (int k = 0; k<temp.length(); k++){
         if (tempGrid[i][k] != '-'){
           encrypted += tempGrid[i][k];
         }
@@ -87,13 +88,15 @@ public class RailFenceCipher extends TranspositionCipher{
     //make a variable which is startPoint which updates by -1 (in order of index in array) everytime
     //you switch to a new array within the 2d one. For instance if the 'first' index in the last array is
     //2 from the back, then the 'first' index in the second to last array is 3 from the back and so on.
-    char[][] tempGrid = makeGrid(getGrid(), ciphertext);
-    int index = ciphertext.length()-1;
+    String temp = processText(ciphertext);
+    char[][] tempGrid = makeGrid(getGrid(), temp);
+    //char[][] tempGrid = makeGrid(getGrid(), processText(ciphertext));
+    int index = temp.length()-1;
     int arrayOn = getKey() - 1;
     while (index>= 0){
-      for(int k = ciphertext.length()-1; k>=0; k--){
+      for(int k = temp.length()-1; k>=0; k--){
         if (tempGrid[arrayOn][k] != '-'){
-          tempGrid[arrayOn][k] = ciphertext.charAt(index);
+          tempGrid[arrayOn][k] = temp.charAt(index);
           index--;
         }
       }
@@ -103,7 +106,7 @@ public class RailFenceCipher extends TranspositionCipher{
     String decrypted = "";
     boolean passedAry = false;
     int ary = -1;
-    for(int i = 0; i<ciphertext.length(); i++){
+    for(int i = 0; i<temp.length(); i++){
       if (!passedAry){
         //System.out.println("" + ary + ", " + plaintext.charAt(i));
         ary++;

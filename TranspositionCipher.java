@@ -3,7 +3,7 @@ abstract class TranspositionCipher extends Cipher{
   private char[][] keyGrid;
   public TranspositionCipher(int k, String text){
     super(k, "");
-    keyGrid = genGrid(text);
+    keyGrid = genGrid(processText(text));
     //keyGrid = genGrid(getKey());
   }
   protected abstract char[][] genGrid(String plaintext);

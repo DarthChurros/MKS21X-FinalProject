@@ -26,9 +26,10 @@ public class VigenereCipher extends PolySubCipher {
 
   public String encrypt(String plaintext) {
     reset();
+    String pt = processText(plaintext);
     String ciphertext = "";
-    for(int i = 0; i < plaintext.length(); i++) {
-      ciphertext += encryptChar(plaintext.charAt(i));
+    for(int i = 0; i < pt.length(); i++) {
+      ciphertext += encryptChar(pt.charAt(i));
     }
     return ciphertext;
   }
@@ -36,10 +37,11 @@ public class VigenereCipher extends PolySubCipher {
   public String decrypt(String ciphertext) {
     reset();
     String plaintext = "";
-    for (int j = 0; j < ciphertext.length(); j++) {
+    String ct = processText(ciphertext);
+    for (int j = 0; j < ct.length(); j++) {
       int letter = 0;
       for (int k = 0; k < 26; k++) {
-        if (getGrid()[counter()][k] == Character.toUpperCase(ciphertext.charAt(j))) {
+        if (getGrid()[counter()][k] == Character.toUpperCase(ct.charAt(j))) {
           letter = k;
           k = 26;
         }

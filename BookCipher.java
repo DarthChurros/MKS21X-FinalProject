@@ -54,8 +54,9 @@ public class BookCipher extends Cipher{
   }
 
   public String encrypt(String plaintext){
-    String pt = plaintext;
+    String pt = processText(plaintext);
     String ct = "";
+    /*
     String puncString = ",.!?()/\";\':- "; //get rid of punctuation
     for (int i = 0; i<pt.length(); i++){
         pt = pt.trim();
@@ -65,6 +66,7 @@ public class BookCipher extends Cipher{
         }
         pt = pt.toUpperCase();
     }
+    */
     //System.out.println("removed punctuation");
     //System.out.println("current plaintext: " + pt);
     for (int j = 0; j<pt.length(); j++){
@@ -92,7 +94,7 @@ public class BookCipher extends Cipher{
     }
     return plainText;
   }
-
+  /*
   public static void main(String[] args){
     try{
       BookCipher nbc = new BookCipher(23, "BookCipherText.txt");

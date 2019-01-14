@@ -7,7 +7,7 @@ public abstract class PolySubCipher extends Cipher{
     counter = 0;
     keyGrid = genGrid();
   }
-
+  /*
   protected static String processText(String text){
     String pt = text;
     //String ct = "";
@@ -22,7 +22,7 @@ public abstract class PolySubCipher extends Cipher{
     pt = pt.toUpperCase();
     return pt;
   }
-
+  */
   protected abstract char[][] genGrid();
 
   protected abstract char encryptChar(char plain);
