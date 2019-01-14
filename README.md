@@ -47,5 +47,8 @@ jan 13, 2018:
 alma adds the remaining ciphers in the set to the demo. adds method processText()
 (static) to Cipher.java so to process sentences with spaces and punctuation.
 adds BookCipher
+tejas adds autokeycipher
 
+jan 14, 2018:
+tejas starts working to add more flexibility to the demo file.
 
