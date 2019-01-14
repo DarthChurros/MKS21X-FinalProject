@@ -12,8 +12,8 @@ public class Demo {
     System.out.println("\t[2] Caesar Cipher");
     System.out.println("\t[3] Vigenere Cipher");
     System.out.println("\t[4] Book Cipher");
-    System.out.println("\t[5] RailFenceCipher Cipher");
-    System.out.println("\t[6] AutokeyCipher\n");
+    System.out.println("\t[5] Rail-Fence Cipher");
+    System.out.println("\t[6] Autokey Cipher\n");
 
     switch (in.next()) {
       case "1":
@@ -38,7 +38,9 @@ public class Demo {
         break;
       case "4":
         try{
-          System.out.println("\nSelect a randomization key (int) for the book Cipher! It will use the enclosed BookCipherText.txt file!\n");
+          System.out.println("\nChoose a plain text book file for this book Cipher!\n");
+          String filename = in.next();
+          System.out.println("\nNow choose an integer randomization key!");
           util = new BookCipher(Integer.parseInt(in.next()), "BookCipherText.txt");
           break;
         }catch(FileNotFoundException e){
