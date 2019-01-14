@@ -13,37 +13,60 @@ public class Demo {
     while (run) {
       System.out.println("\nYour ciphers: ");
       for (int i = 0; i < ciphers.size(); i++) {
-        System.out.println("\t" + ciphers.get(i));
+        System.out.println("\t"+i+") " + ciphers.get(i));
       }
-      System.out.println("What would you like to do?\n");
-      System.out.println("\t[1] View ciphers");
-      System.out.println("\t[2] Add a cipher");
-      System.out.println("\t[3] Remove a cipher");
+      System.out.println("\nWhat would you like to do?\n");
+      System.out.println("\t[1] Add a cipher");
+      System.out.println("\t[2] Remove a cipher");
+      System.out.println("\t[3] Run a cipher");
 
-      System.out.println("\nSelect a function: \n");
-      System.out.println("\t[1] Encryption");
-      System.out.println("\t[2] Decryption\n");
-
-      switch(in.next()) {
+      switch (in.next()) {
         case "1":
-          in.nextLine();
-          System.out.println("Enter your plaintext: ");
-          System.out.println("\nCiphertext: " + ciphers.get(0).encrypt(in.nextLine()));
+          ciphers.add(initCipher(in));
           break;
         case "2":
-          in.nextLine();
-          System.out.println("Enter your ciphertext: ");
-          System.out.println("\nPlaintext: " + ciphers.get(0).decrypt(in.nextLine()));
+          System.out.println("\nWhich cipher would you like to remove?\n");
+          for (int i = 0; i < ciphers.size(); i++) {
+            System.out.println("\t["+i+"] " + ciphers.get(i));
+          }
+          System.out.println("\nRemoving cipher "+ ciphers.remove(Integer.parseInt(in.next())) + "\n");
           break;
-        default:
-          quit("Invalid selection! QUITTING");
+        case "3":
+        System.out.println("\nWhich cipher would you like to run?\n");
+        for (int i = 0; i < ciphers.size(); i++) {
+          System.out.println("\t["+i+"] " + ciphers.get(i));
+        }
+        int toRun = in.nextInt();
+        System.out.println("\nRunning " + ciphers.get(toRun) + "\n");
+        runCipher(ciphers.get(toRun), in);
       }
+    }
+  }
+
+  public static void runCipher(Cipher toRun, Scanner preset) {
+    System.out.println("\nSelect a function: \n");
+    System.out.println("\t[1] Encryption");
+    System.out.println("\t[2] Decryption\n");
+
+    switch(preset.next()) {
+      case "1":
+        preset.nextLine();
+        System.out.println("Enter your plaintext: ");
+        System.out.println("\nCiphertext: " + toRun.encrypt(preset.nextLine()));
+        break;
+      case "2":
+        preset.nextLine();
+        System.out.println("Enter your ciphertext: ");
+        System.out.println("\nPlaintext: " + toRun.decrypt(preset.nextLine()));
+        break;
+      default:
+        quit("Invalid selection! QUITTING");
     }
   }
 
   public static Cipher initCipher(Scanner preset) {
     Cipher util;
-    System.out.println("Please select a cipher to add: \n");
+    System.out.println("\nPlease select a cipher to add: \n");
     System.out.println("\t[1] Substitution Cipher");
     System.out.println("\t[2] Caesar Cipher");
     System.out.println("\t[3] Vigenere Cipher");
