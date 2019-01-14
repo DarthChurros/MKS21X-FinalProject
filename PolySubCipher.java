@@ -23,7 +23,7 @@ public abstract class PolySubCipher extends Cipher{
     return pt;
   }
   */
-  protected abstract char[][] genGrid();
+  public abstract char[][] genGrid();
 
   protected abstract char encryptChar(char plain);
 

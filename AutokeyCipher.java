@@ -1,7 +1,7 @@
 public class AutokeyCipher extends VigenereCipher {
   public AutokeyCipher(String keyStr) {
     super(keyStr);
-    type = "Autokey Cipher";
+    type = "Autokey cipher";
   }
 
   public String encrypt(String plaintext) {

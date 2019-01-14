@@ -15,7 +15,7 @@ public class CaesarCipher extends SubCipher{
   */
   public CaesarCipher(int k){
     super(k); //k is the shift amount
-    type = "Caesar Cipher";
+    type = "Caesar cipher";
   }
   public char[][] genGrid(){
     if (getGrid() == null){

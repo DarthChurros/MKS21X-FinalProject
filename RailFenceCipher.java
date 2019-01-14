@@ -4,7 +4,7 @@ public class RailFenceCipher extends TranspositionCipher{
   public RailFenceCipher(int k, String text){
     super(k, text);
     distance = 2*getKey() - 2;
-    type = "Rail-Fence Cipher";
+    type = "Rail-fence cipher";
   }
   //first should be encrypte and decrypt, in both the plaintext or cipher text are specified
   //and then the grid can be made
