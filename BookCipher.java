@@ -92,7 +92,7 @@ public class BookCipher extends Cipher{
       tempText = tempText.substring(indexSpace+1, tempText.length());
       plainText += charList.get(intToProcess);
     }
-    return plainText;
+    return plainText.toLowerCase();
   }
   /*
   public static void main(String[] args){

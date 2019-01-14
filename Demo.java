@@ -12,7 +12,8 @@ public class Demo {
     System.out.println("\t[2] Caesar Cipher");
     System.out.println("\t[3] Vigenere Cipher");
     System.out.println("\t[4] Book Cipher");
-    System.out.println("\t[5] RailFenceCipher Cipher\n");
+    System.out.println("\t[5] RailFenceCipher Cipher");
+    System.out.println("\t[6] AutokeyCipher\n");
 
     switch (in.next()) {
       case "1":
@@ -21,8 +22,7 @@ public class Demo {
           util = new SubCipher(Integer.parseInt(in.next()));
           break;
         }catch(NumberFormatException e){
-          System.out.println("input a int please! QUITTING");
-          System.exit(1);
+          quit("Key must be a number! QUITTING");
         }
       case "2":
         try{
@@ -30,11 +30,10 @@ public class Demo {
           util = new CaesarCipher(Integer.parseInt(in.next()));
           break;
         }catch(NumberFormatException e){
-          System.out.println("input a int please! QUITTING");
-          System.exit(1);
+          quit("Key must be a number! QUITTING");
         }
       case "3":
-        System.out.println("\nSelect a (String) key for this Vigenere cipher!\n");
+        System.out.println("\nSelect a keyword for this Vigenere cipher!\n");
         util = new VigenereCipher(in.next());
         break;
       case "4":
@@ -43,11 +42,9 @@ public class Demo {
           util = new BookCipher(Integer.parseInt(in.next()), "BookCipherText.txt");
           break;
         }catch(FileNotFoundException e){
-          System.out.println("Your machine doesn't have BookCipherText.txt! QUITTING");
-          System.exit(1);
+          quit("BookCipherText.txt not found! QUITTING");
         }catch(NumberFormatException e){
-          System.out.println("input a int please! QUITTING");
-          System.exit(1);
+          quit("input a int please! QUITTING");
         }
       case "5":
         System.out.println("\nSelect the height of your fence  (int) and specify the text to encrypt for the RailFenceCipher!\n");
@@ -56,9 +53,13 @@ public class Demo {
         String b = in.nextLine();
         util = new RailFenceCipher(Integer.parseInt(a), b);
         break;
+      case "6":
+        System.out.println("Select a keyword for this Autokey cipher!\n");
+        util = new AutokeyCipher(in.next());
+        break;
       default:
         util = new SubCipher(0);
-        quit();
+        quit("Invalid selection! QUITTING");
     }
     System.out.println("\nSelect a function: \n");
     System.out.println("\t[1] Encryption");
@@ -76,12 +77,12 @@ public class Demo {
         System.out.println("\nPlaintext: " + util.decrypt(in.nextLine()));
         break;
       default:
-        quit();
+        quit("Invalid selection! QUITTING");
     }
   }
 
-  public static void quit() {
-    System.out.println("Invalid selection! QUITTING");
+  public static void quit(String msg) {
+    System.out.println(msg);
     System.exit(1);
   }
 }

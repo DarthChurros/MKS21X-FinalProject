@@ -5,7 +5,7 @@ public class VigenereCipher extends PolySubCipher {
     super(keyStr.length(), keyStr);
   }
 
-  protected char[][] genGrid() {
+  public char[][] genGrid() {
     if (getGrid() != null) {
       throw new IllegalStateException("Grid already initialized");
     }
@@ -22,16 +22,6 @@ public class VigenereCipher extends PolySubCipher {
     char cipher = getGrid()[counter()][Character.toUpperCase(plain) - 'A'];
     iter();
     return cipher;
-  }
-
-  public String encrypt(String plaintext) {
-    reset();
-    String pt = processText(plaintext);
-    String ciphertext = "";
-    for(int i = 0; i < pt.length(); i++) {
-      ciphertext += encryptChar(pt.charAt(i));
-    }
-    return ciphertext;
   }
 
   public String decrypt(String ciphertext) {

@@ -23,9 +23,19 @@ public abstract class PolySubCipher extends Cipher{
     return pt;
   }
   */
-  protected abstract char[][] genGrid();
+  public abstract char[][] genGrid();
 
   protected abstract char encryptChar(char plain);
+
+  public String encrypt(String plaintext) {
+    reset();
+    String pt = processText(plaintext);
+    String ciphertext = "";
+    for(int i = 0; i < pt.length(); i++) {
+      ciphertext += encryptChar(pt.charAt(i));
+    }
+    return ciphertext;
+  }
 
   protected char[][] getGrid() {
     return keyGrid;

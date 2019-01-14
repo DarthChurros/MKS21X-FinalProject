@@ -60,23 +60,22 @@ public class SubCipher extends PolySubCipher{
     return getGrid()[0][index];
   }
 
-  protected char[][] genGrid(){
-    if (getGrid() == null){
-      rng = new Random(getKey());
-      char[][] grid = new char[1][26]; //getGrid returns reference to array itself, so you have access to modifying it
-      String letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-      for (int i = 0; i<26; i++){
-        int randNum = Math.abs(rng.nextInt());
-        //set random index of letters to the keygrid, then remove that letter from array and do from rand#%26 to rand#%25...
-        grid[0][i] = letters.charAt(randNum%(26-i));
-        letters = letters.substring(0, randNum%(26-i)) + letters.substring(randNum%(26-i)+1, letters.length());
-        //remove is n2... find better solution
-        //solution I think was to use strings
-      }
-      return grid;
-    }else{
-      throw new IllegalStateException("You can't call fillGrid twice!");
+  public char[][] genGrid(){
+    if (getGrid() != null){
+      throw new IllegalStateException("Grid already initialized!");
     }
+    rng = new Random(getKey());
+    char[][] grid = new char[1][26]; //getGrid returns reference to array itself, so you have access to modifying it
+    String letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    for (int i = 0; i<26; i++){
+      int randNum = Math.abs(rng.nextInt());
+      //set random index of letters to the keygrid, then remove that letter from array and do from rand#%26 to rand#%25...
+      grid[0][i] = letters.charAt(randNum%(26-i));
+      letters = letters.substring(0, randNum%(26-i)) + letters.substring(randNum%(26-i)+1, letters.length());
+      //remove is n2... find better solution
+      //solution I think was to use strings
+    }
+    return grid;
   }
 
 }

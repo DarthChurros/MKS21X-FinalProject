@@ -123,7 +123,7 @@ public class RailFenceCipher extends TranspositionCipher{
         passedAry = !passedAry;
       }
     }
-    return decrypted; //+ "\n" + toStringGrid(tempGrid);
+    return decrypted.toLowerCase(); //+ "\n" + toStringGrid(tempGrid);
 
     /*
     char[][] tempGrid = getGrid();
