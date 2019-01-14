@@ -41,3 +41,11 @@ processed over and over
 jan 12, 2018:
 tejas fixes several fatal bugs in vigenere. tested the demo file,
 and it works so far. plan to add more customizability later in the day.
+alma wrote railFencEcipher. was hard
+
+jan 13, 2018:
+alma adds the remaining ciphers in the set to the demo. adds method processText()
+(static) to Cipher.java so to process sentences with spaces and punctuation.
+adds BookCipher
+
+
