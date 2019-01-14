@@ -1,12 +1,9 @@
 public class AutokeyCipher extends VigenereCipher {
-  int c;
   public AutokeyCipher(String keyStr) {
     super(keyStr);
-    c = 0;
   }
 
   public String encrypt(String plaintext) {
-    c = 0;
     plaintext = getKeyword() + processText(plaintext);
     String ciphertext = "";
     for (int i = 0; i < plaintext.length()-getKey(); i++) {
@@ -19,6 +16,13 @@ public class AutokeyCipher extends VigenereCipher {
   }
 
   public String decrypt(String ciphertext) {
-    return "unfinished feature";
+    String plaintext = "";
+    plaintext += super.decrypt(ciphertext.substring(0,getKey()));
+    ciphertext = ciphertext.substring(getKey(),ciphertext.length());
+    System.out.println("ciphertext = " + ciphertext);
+    for (int i = 0; i < ciphertext.length(); i++) {
+      plaintext += (char)(Math.floorMod(ciphertext.charAt(i) - Character.toUpperCase(plaintext.charAt(i)), 26) + 'A');
+    }
+    return plaintext.toLowerCase();
   }
 }
