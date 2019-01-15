@@ -13,7 +13,7 @@ public class Demo {
     while (run) {
       System.out.println("\nYour ciphers: ");
       for (int i = 0; i < ciphers.size(); i++) {
-        System.out.println("\t"+i+") " + ciphers.get(i));
+        System.out.println("\t"+(i+1)+") " + ciphers.get(i));
       }
       System.out.println("\nWhat would you like to do?\n");
       System.out.println("\t[1] Add a cipher");
@@ -27,18 +27,21 @@ public class Demo {
         case "2":
           System.out.println("\nWhich cipher would you like to remove?\n");
           for (int i = 0; i < ciphers.size(); i++) {
-            System.out.println("\t["+i+"] " + ciphers.get(i));
+            System.out.println("\t["+(i+1)+"] " + ciphers.get(i));
           }
           System.out.println("\nRemoving cipher "+ ciphers.remove(Integer.parseInt(in.next())) + "\n");
           break;
         case "3":
-        System.out.println("\nWhich cipher would you like to run?\n");
-        for (int i = 0; i < ciphers.size(); i++) {
-          System.out.println("\t["+i+"] " + ciphers.get(i));
-        }
-        int toRun = in.nextInt();
-        System.out.println("\nRunning " + ciphers.get(toRun) + "\n");
-        runCipher(ciphers.get(toRun), in);
+          System.out.println("\nWhich cipher would you like to run?\n");
+          for (int i = 0; i < ciphers.size(); i++) {
+            System.out.println("\t["+i+"] " + ciphers.get(i));
+          }
+          int toRun = in.nextInt();
+          System.out.println("\nRunning " + ciphers.get(toRun) + "\n");
+          runCipher(ciphers.get(toRun), in);
+          break;
+        default:
+          quit("Invalid selection! QUITTING");
       }
     }
   }
