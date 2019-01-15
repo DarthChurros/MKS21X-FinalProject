@@ -12,7 +12,7 @@ public class BookCipher extends Cipher{
   public BookCipher(int k, String t) throws FileNotFoundException{ //k can be key for rand num. t is name of text file
     super(k, t); //so keyword == filename and k == key
     randgen = new Random(getKey()); //we will use this to encrypt
-    File f = new File(t);
+    File f = new File(getKeyword());
     Scanner in = new Scanner(f);
     charList = new ArrayList<Character>();
     String puncString = ",.!?()/\";\':-"; //get rid of punctuation
@@ -28,6 +28,10 @@ public class BookCipher extends Cipher{
           charList.add(word.charAt(i));
         }
     }
+  }
+
+  public String getKeyword() {
+    return super.getKeyword() + ".txt";
   }
 
   private Integer encryptChar(char c){ //should have it roll over, not just automatically give the highest index when amountIters > amountof times it shows up
