@@ -50,5 +50,6 @@ adds BookCipher
 tejas adds autokeycipher
 
 jan 14, 2018:
-tejas starts working to add more flexibility to the demo file.
+tejas starts working to add more flexibility to the demo file. Support for
+multiple ciphers. gave ciphers toStrings to display while running the demo.
 
