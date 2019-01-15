@@ -25,11 +25,15 @@ public class Demo {
           ciphers.add(initCipher(in));
           break;
         case "2":
-          System.out.println("\nWhich cipher would you like to remove?\n");
-          for (int i = 0; i < ciphers.size(); i++) {
-            System.out.println("\t["+(i+1)+"] " + ciphers.get(i));
+          if (ciphers.size() == 0) {
+            System.out.println("\nYou don't have any ciphers to remove!");
+          } else {
+            System.out.println("\nWhich cipher would you like to remove?\n");
+            for (int i = 0; i < ciphers.size(); i++) {
+              System.out.println("\t["+(i+1)+"] " + ciphers.get(i));
+            }
+            System.out.println("\nRemoving cipher "+ ciphers.remove(in.nextInt()-1) + "\n");
           }
-          System.out.println("\nRemoving cipher "+ ciphers.remove(in.nextInt()-1) + "\n");
           break;
         case "3":
           System.out.println("\nWhich cipher would you like to run?\n");
