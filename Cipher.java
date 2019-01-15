@@ -5,7 +5,7 @@ public abstract class Cipher {
 
   public Cipher(int keyNum, String keyStr) {
     key = keyNum;
-    keyword = keyStr;
+    keyword = processText(keyStr);
   }
 
   public abstract String encrypt(String plaintext);

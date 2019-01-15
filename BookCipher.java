@@ -12,7 +12,7 @@ public class BookCipher extends Cipher{
   public BookCipher(int k, String t) throws FileNotFoundException{ //k can be key for rand num. t is name of text file
     super(k, t); //so keyword == filename and k == key
     randgen = new Random(getKey()); //we will use this to encrypt
-    File f = new File(getKeyword());
+    File f = new File(t);
     Scanner in = new Scanner(f);
     charList = new ArrayList<Character>();
     String puncString = ",.!?()/\";\':-"; //get rid of punctuation
@@ -97,7 +97,7 @@ public class BookCipher extends Cipher{
   }
 
   public String toString() {
-    return "Book cipher with key: "+getKey()+" from file: "+getKeyword();
+    return "Book cipher with key: "+getKey()+" from file: "+getKeyword().substring(0,getKeyword().length()-3);
   }
   /*
   public static void main(String[] args){

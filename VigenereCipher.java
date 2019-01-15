@@ -2,7 +2,7 @@ import java.util.Arrays;
 public class VigenereCipher extends PolySubCipher {
 
   public VigenereCipher(String keyStr) {
-    super(keyStr.length(), keyStr);
+    super(processText(keyStr).length(), keyStr);
   }
 
   public char[][] genGrid() {

@@ -29,14 +29,14 @@ public class Demo {
           for (int i = 0; i < ciphers.size(); i++) {
             System.out.println("\t["+(i+1)+"] " + ciphers.get(i));
           }
-          System.out.println("\nRemoving cipher "+ ciphers.remove(Integer.parseInt(in.next())) + "\n");
+          System.out.println("\nRemoving cipher "+ ciphers.remove(in.nextInt()-1) + "\n");
           break;
         case "3":
           System.out.println("\nWhich cipher would you like to run?\n");
           for (int i = 0; i < ciphers.size(); i++) {
-            System.out.println("\t["+i+"] " + ciphers.get(i));
+            System.out.println("\t["+(i+1)+"] " + ciphers.get(i));
           }
-          int toRun = in.nextInt();
+          int toRun = in.nextInt()-1;
           System.out.println("\nRunning " + ciphers.get(toRun) + "\n");
           runCipher(ciphers.get(toRun), in);
           break;
@@ -96,17 +96,20 @@ public class Demo {
         }
       case "3":
         System.out.println("\nSelect a keyword for this Vigenere cipher!\n");
-        util = new VigenereCipher(preset.next());
+        preset.nextLine();
+        util = new VigenereCipher(preset.nextLine());
         break;
       case "4":
+      String filename = "";
         try{
-          System.out.println("\nChoose a plain text book file for this book Cipher!\n");
-          String filename = preset.next();
+          System.out.println("\nChoose a plain text book file for this book cipher!\n");
+          preset.nextLine();
+          filename = preset.nextLine();
           System.out.println("\nNow choose an integer randomization key!");
-          util = new BookCipher(Integer.parseInt(preset.next()), "BookCipherText.txt");
+          util = new BookCipher(preset.nextInt(), filename);
           break;
         }catch(FileNotFoundException e){
-          quit("BookCipherText.txt not found! QUITTING");
+          quit(filename+" not found! QUITTING");
         }catch(NumberFormatException e){
           quit("input a int please! QUITTING");
         }
@@ -119,13 +122,13 @@ public class Demo {
         break;
       case "6":
         System.out.println("Select a keyword for this Autokey cipher!\n");
-        util = new AutokeyCipher(preset.next());
+        preset.nextLine();
+        util = new AutokeyCipher(preset.nextLine());
         break;
       default:
         util = new SubCipher(0);
         quit("Invalid selection! QUITTING");
     }
-
     return util;
   }
 
