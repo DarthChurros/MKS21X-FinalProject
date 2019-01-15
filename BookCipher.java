@@ -101,7 +101,7 @@ public class BookCipher extends Cipher{
   }
 
   public String toString() {
-    return "Book cipher with key: "+getKey()+" from file: "+getKeyword().substring(0,getKeyword().length()-3);
+    return "Book cipher with key: "+getKey()+" from file: "+getKeyword().substring(0,getKeyword());
   }
   /*
   public static void main(String[] args){
