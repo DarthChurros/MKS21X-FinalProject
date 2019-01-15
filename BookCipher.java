@@ -11,7 +11,6 @@ public class BookCipher extends Cipher{
   //VV will throw filenot found
   public BookCipher(int k, String t) throws FileNotFoundException{ //k can be key for rand num. t is name of text file
     super(k, t); //so keyword == filename and k == key
-    type = "Book cipher";
     randgen = new Random(getKey()); //we will use this to encrypt
     File f = new File(getKeyword());
     Scanner in = new Scanner(f);
@@ -95,6 +94,10 @@ public class BookCipher extends Cipher{
       plainText += charList.get(intToProcess);
     }
     return plainText.toLowerCase();
+  }
+
+  public String toString() {
+    return "Book cipher with key: "+getKey()+" from file: "+getKeyword();
   }
   /*
   public static void main(String[] args){

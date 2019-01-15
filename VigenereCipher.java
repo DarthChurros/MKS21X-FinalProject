@@ -3,7 +3,6 @@ public class VigenereCipher extends PolySubCipher {
 
   public VigenereCipher(String keyStr) {
     super(keyStr.length(), keyStr);
-    type = "Vigenere cipher";
   }
 
   public char[][] genGrid() {
@@ -41,5 +40,9 @@ public class VigenereCipher extends PolySubCipher {
       iter();
     }
     return plaintext;
+  }
+
+  public String toString() {
+    return "Vigenere cipher with keyword: "+getKeyword();
   }
 }

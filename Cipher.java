@@ -2,7 +2,6 @@ public abstract class Cipher {
   private int key;
   private String keyword;
   private String name;
-  static String type = "Cipher";
 
   public Cipher(int keyNum, String keyStr) {
     key = keyNum;
@@ -32,9 +31,5 @@ public abstract class Cipher {
       text = text.replace(punc, ""); //this is a long process, i hope it is ok
     }
     return text.toUpperCase();
-  }
-
-  public String toString() {
-    return type + " with key: "+getKey()+" and keyword: "+getKeyword();
   }
 }

@@ -1,7 +1,6 @@
 public class AutokeyCipher extends VigenereCipher {
   public AutokeyCipher(String keyStr) {
     super(keyStr);
-    type = "Autokey cipher";
   }
 
   public String encrypt(String plaintext) {
@@ -25,5 +24,9 @@ public class AutokeyCipher extends VigenereCipher {
       plaintext += (char)(Math.floorMod(ciphertext.charAt(i) - Character.toUpperCase(plaintext.charAt(i)), 26) + 'A');
     }
     return plaintext.toLowerCase();
+  }
+
+  public String toString() {
+    return "Autokey cipher with keyword: "+getKeyword();
   }
 }

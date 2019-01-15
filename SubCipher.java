@@ -23,7 +23,6 @@ public class SubCipher extends PolySubCipher{
     //Random randomObject = new Random(); //THESE LINES
     //key = randomObject.nextInt(); //ARE THE USER'S PROBLEM. USER HAS TO PROVIDE A KEY FOR THE RANDOM OBJECT
     super(k, ""); //k is key for random object
-    type = "Substitution cipher";
     }
 
     //to decrypt, you can't use this! you have to use constructor that specifies
@@ -79,4 +78,7 @@ public class SubCipher extends PolySubCipher{
     return grid;
   }
 
+  public String toString() {
+    return "Substitution cipher with key: "+getKey();
+  }
 }
