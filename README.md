@@ -52,4 +52,6 @@ tejas adds autokeycipher
 jan 14, 2018:
 tejas starts working to add more flexibility to the demo file. Support for
 multiple ciphers. gave ciphers toStrings to display while running the demo.
-
+Ciphers should have a method keyless() that attempts to decrypt the given 
+ciphertext without a key, but don't make that an abstract method as we won't
+be able to implement it for all ciphers!
