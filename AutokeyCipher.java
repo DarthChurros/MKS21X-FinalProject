@@ -25,4 +25,8 @@ public class AutokeyCipher extends VigenereCipher {
     }
     return plaintext.toLowerCase();
   }
+
+  public String toString() {
+    return "Autokey cipher with keyword: "+getKeyword();
+  }
 }

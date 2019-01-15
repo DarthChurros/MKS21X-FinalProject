@@ -78,4 +78,7 @@ public class SubCipher extends PolySubCipher{
     return grid;
   }
 
+  public String toString() {
+    return "Substitution cipher with key: "+getKey();
+  }
 }

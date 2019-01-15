@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Random;
 //import java.util.Math;
 public class BookCipher extends Cipher{
+
   private Random randgen;
   ArrayList<Character> charList;
   //VV will throw filenot found
@@ -27,6 +28,10 @@ public class BookCipher extends Cipher{
           charList.add(word.charAt(i));
         }
     }
+  }
+
+  public String getKeyword() {
+    return super.getKeyword() + ".txt";
   }
 
   private Integer encryptChar(char c){ //should have it roll over, not just automatically give the highest index when amountIters > amountof times it shows up
@@ -93,6 +98,10 @@ public class BookCipher extends Cipher{
       plainText += charList.get(intToProcess);
     }
     return plainText.toLowerCase();
+  }
+
+  public String toString() {
+    return "Book cipher with key: "+getKey()+" from file: "+getKeyword();
   }
   /*
   public static void main(String[] args){

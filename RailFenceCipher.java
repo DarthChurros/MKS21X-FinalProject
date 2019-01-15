@@ -166,4 +166,7 @@ public class RailFenceCipher extends TranspositionCipher{
     return toReturn;
   }
   //  public abstract String decrypt(String ciphertext);
+  public String toString() {
+    return "Rail-fence cipher with rails: "+getKey() + " and initial plaintext: "+getKeyword();
+  }
 }

@@ -16,7 +16,7 @@ public class CaesarCipher extends SubCipher{
   public CaesarCipher(int k){
     super(k); //k is the shift amount
   }
-  protected char[][] genGrid(){
+  public char[][] genGrid(){
     if (getGrid() == null){
       char[][] grid = new char[1][26];
       for (int i = 0; i<26; i++){
@@ -26,5 +26,8 @@ public class CaesarCipher extends SubCipher{
     }else{
       throw new IllegalStateException("You can't call fillGrid twice!");
     }
+  }
+  public String toString() {
+    return "Caesar cipher with shift key: "+getKey();
   }
 }

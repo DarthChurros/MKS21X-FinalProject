@@ -1,10 +1,11 @@
 public abstract class Cipher {
   private int key;
   private String keyword;
+  private String name;
 
   public Cipher(int keyNum, String keyStr) {
     key = keyNum;
-    keyword = keyStr;
+    keyword = processText(keyStr);
   }
 
   public abstract String encrypt(String plaintext);
