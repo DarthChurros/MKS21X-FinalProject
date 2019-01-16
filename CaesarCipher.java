@@ -20,17 +20,19 @@ public class CaesarCipher extends SubCipher{
     super(k); //k is the shift amount
   }
 
-  public static String keylessDecryption(String realCT) throws FileNotFoundException { //bc isWord() throws this
+  public static String keylessDecrypt(String realCT) throws FileNotFoundException{ //bc isWord() throws this
     //int countOfWords = 0;
-    int keY; //will be the int of the highest shift key
+    int keY=0; //will be the int of the highest shift key
     int maxCountOfWords = 0;
     int a = (realCT.length()-1)/4 + 1; //how many 'words' can be made if a space is made every 4 chars
     String[] ctWords = new String[a];
+    System.out.println("At line 29");
     for (int shift = 0; shift<26; shift++){
       int countOfWords = 0;
       CaesarCipher toTest = new CaesarCipher(shift);
       String pt = toTest.decrypt(realCT);
       int index = 0;
+      System.out.println("At line 35");
       for (int i = 0; i<pt.length(); i+=4){ //make the String[] of 'words' in the pt
         if (i > pt.length()-5){
           ctWords[index] = pt.substring(i, pt.length());
@@ -38,6 +40,7 @@ public class CaesarCipher extends SubCipher{
         ctWords[index] = pt.substring(i, i+4);
         index++;
       }
+      System.out.println("At line 43");
       for (String word : ctWords){ //check each 'word' in ctWords and see if they're actually words
         if (isWord(word)){
           countOfWords++;
@@ -47,8 +50,10 @@ public class CaesarCipher extends SubCipher{
           keY = shift;
         }
       }
+      System.out.println("at line 53");
     }
     CaesarCipher toReturn = new CaesarCipher(keY);
+    System.out.println("at line 56");
     return toReturn.decrypt(realCT);
     /*
     realCT = processText(realCT);

@@ -38,6 +38,19 @@ public abstract class Cipher {
     return false;
   }
 
+  public static String keylessDecrypt(String ct) throws FileNotFoundException{
+    //have to import dictionary or dictionary file
+    //but there aren't any spaces in the ciphertext!
+    //add our own? every 4 letters add a space, maybe that has the highest chance it perhaps cutting the sentence sometimes
+    //where it needs to be cut?
+    //then, this is going to be inherited by caesar so start with caesar. Just go through the decryption method 25 times (check current text first)
+    //and each time split it up every 4 characters, and run each word thru a method called "isWord", and have a counter counting
+    //how many of the created words are actually words. The solution w the most actual words can be returned, with the spaces removed
+    //i think this is a good rudimentary way to approach keylessDecryption
+    return "";
+  }
+
+
   protected static String processText(String text){
     //String ct = "";
     String puncString = ",.!?()/\";\':- "; //get rid of punctuation

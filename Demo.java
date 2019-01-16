@@ -26,7 +26,7 @@ public class Demo {
           break;
         case "2":
           if (ciphers.size() == 0) {
-            System.out.println("\nYou don't have any ciphers to remove!");
+            System.out.println("\nYou don't have any ciphers to remove!"); //where does the user go if this is the case --> i see, it goes to asking you waht to do cuz running is true!
           } else {
             System.out.println("\nWhich cipher would you like to remove?\n");
             for (int i = 0; i < ciphers.size(); i++) {
@@ -40,6 +40,7 @@ public class Demo {
           for (int i = 0; i < ciphers.size(); i++) {
             System.out.println("\t["+(i+1)+"] " + ciphers.get(i));
           }
+          //System.out.prinln("\t[" + ciphers.size() +"]" + "Keyless Decryption (specify cipher soon)")
           int toRun = in.nextInt()-1;
           System.out.println("\nRunning " + ciphers.get(toRun) + "\n");
           runCipher(ciphers.get(toRun), in);
@@ -53,7 +54,8 @@ public class Demo {
   public static void runCipher(Cipher toRun, Scanner preset) {
     System.out.println("\nSelect a function: \n");
     System.out.println("\t[1] Encryption");
-    System.out.println("\t[2] Decryption\n");
+    System.out.println("\t[2] Decryption");
+    System.out.println("\t[3] Keyless Decryption (only have for CaesarCipher!)\n");
 
     switch(preset.next()) {
       case "1":
@@ -65,6 +67,15 @@ public class Demo {
         preset.nextLine();
         System.out.println("Enter your ciphertext: ");
         System.out.println("\nPlaintext: " + toRun.decrypt(preset.nextLine()));
+        break;
+      case "3":
+        try{
+          preset.nextLine();
+          System.out.println("Enter your ciphertext: (you don't have to have inputted its key when making the cipher!) ");///
+          System.out.println("\nPlaintext: " + toRun.keylessDecrypt(preset.nextLine())); //it does not need to be called on an object, tho it can be
+        }catch(FileNotFoundException e){
+          quit("Problem with words1000.txt! QUITTING");
+        }
         break;
       default:
         quit("Invalid selection! QUITTING");
