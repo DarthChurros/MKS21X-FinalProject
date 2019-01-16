@@ -1,7 +1,9 @@
 import java.util.Random;
 import java.lang.Math;
 import java.lang.IllegalStateException;
-
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 public class SubCipher extends PolySubCipher{
   /**
   public static void main(String[] args){
@@ -78,7 +80,7 @@ public class SubCipher extends PolySubCipher{
     return grid;
   }
 
-  public static String keylessDecryption(String ct){
+  public static String keylessDecryption(String ct) throws FileNotFoundException{
     //have to import dictionary or dictionary file
     //but there aren't any spaces in the ciphertext!
     //add our own? every 4 letters add a space, maybe that has the highest chance it perhaps cutting the sentence sometimes

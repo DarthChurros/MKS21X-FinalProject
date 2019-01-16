@@ -1,5 +1,8 @@
 import java.lang.Math;
 import java.lang.IllegalStateException;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 public class CaesarCipher extends SubCipher{
   /*
   public static void main(String[] args){
@@ -17,7 +20,37 @@ public class CaesarCipher extends SubCipher{
     super(k); //k is the shift amount
   }
 
-  public static String keylessDecryption(String realCT) throws FileNotFoundException{ //bc isWord() throws this
+  public static String keylessDecryption(String realCT) throws FileNotFoundException { //bc isWord() throws this
+    //int countOfWords = 0;
+    int keY; //will be the int of the highest shift key
+    int maxCountOfWords = 0;
+    int a = (realCT.length()-1)/4 + 1; //how many 'words' can be made if a space is made every 4 chars
+    String[] ctWords = new String[a];
+    for (int shift = 0; shift<26; shift++){
+      int countOfWords = 0;
+      CaesarCipher toTest = new CaesarCipher(shift);
+      String pt = toTest.decrypt(realCT);
+      int index = 0;
+      for (int i = 0; i<pt.length(); i+=4){ //make the String[] of 'words' in the pt
+        if (i > pt.length()-5){
+          ctWords[index] = pt.substring(i, pt.length());
+        }
+        ctWords[index] = pt.substring(i, i+4);
+        index++;
+      }
+      for (String word : ctWords){ //check each 'word' in ctWords and see if they're actually words
+        if (isWord(word)){
+          countOfWords++;
+        }
+        if (countOfWords>maxCountOfWords){
+          maxCountOfWords = countOfWords;
+          keY = shift;
+        }
+      }
+    }
+    CaesarCipher toReturn = new CaesarCipher(keY);
+    return toReturn.decrypt(realCT);
+    /*
     realCT = processText(realCT);
     int countOfWords = 0;
     int maxCountOfWords = 0;
@@ -53,6 +86,7 @@ public class CaesarCipher extends SubCipher{
     return toReturn.decrypt(ct); //a quicker way to do this is to run a loop 26 times, make a new object every time,
     //decrypt w index of for look in that object and then do the spaces and checks
     //fakeSpace.trim();
+    */
 
   }
   public char[][] genGrid(){
