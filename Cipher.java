@@ -1,3 +1,6 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 public abstract class Cipher {
   private int key;
   private String keyword;
@@ -18,6 +21,21 @@ public abstract class Cipher {
 
   public String getKeyword() {
     return keyword;
+  }
+
+  protected static boolean isWord(String word) throws FileNotFoundException{
+    File f = new File("words1000.txt");
+    Scanner wordList = new Scanner(f);
+    String current;
+    while (wordList.hasNextLine()){
+      current = wordList.nextLine();
+      if (current.equals(word)){
+        wordList.close();
+        return true;
+      }
+    }
+    wordList.close();
+    return false;
   }
 
   protected static String processText(String text){
