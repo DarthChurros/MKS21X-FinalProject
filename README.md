@@ -52,6 +52,11 @@ tejas adds autokeycipher
 jan 14, 2018:
 tejas starts working to add more flexibility to the demo file. Support for
 multiple ciphers. gave ciphers toStrings to display while running the demo.
-Ciphers should have a method keyless() that attempts to decrypt the given 
+Ciphers should have a method keyless() that attempts to decrypt the given
 ciphertext without a key, but don't make that an abstract method as we won't
 be able to implement it for all ciphers!
+
+jan 15 2018:
+big note: a linux-specific bug: bookcipher can't process the name of the text file bc linux is case sensitive
+mac isn't. so processing the keyword input on mac is no issue, doing so on linux means you can only
+use text files w titles in all-caps
