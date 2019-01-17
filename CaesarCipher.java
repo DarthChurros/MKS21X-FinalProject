@@ -3,6 +3,8 @@ import java.lang.IllegalStateException;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
 public class CaesarCipher extends SubCipher{
   /*
   public static void main(String[] args){
@@ -19,79 +21,50 @@ public class CaesarCipher extends SubCipher{
   public CaesarCipher(int k){
     super(k); //k is the shift amount
   }
-
-  public static String keylessDecrypt(String realCT) throws FileNotFoundException{ //bc isWord() throws this
-    //int countOfWords = 0;
-    int keY=0; //will be the int of the highest shift key
-    int maxCountOfWords = 0;
-    int a = (realCT.length()-1)/4 + 1; //how many 'words' can be made if a space is made every 4 chars
-    String[] ctWords = new String[a];
-    System.out.println("At line 29");
-    for (int shift = 0; shift<26; shift++){
-      int countOfWords = 0;
-      CaesarCipher toTest = new CaesarCipher(shift);
-      String pt = toTest.decrypt(realCT);
-      int index = 0;
-      System.out.println("At line 35");
-      for (int i = 0; i<pt.length(); i+=4){ //make the String[] of 'words' in the pt
-        if (i > pt.length()-5){
-          ctWords[index] = pt.substring(i, pt.length());
-        }
-        ctWords[index] = pt.substring(i, i+4);
-        index++;
-      }
-      System.out.println("At line 43");
-      for (String word : ctWords){ //check each 'word' in ctWords and see if they're actually words
-        if (isWord(word)){
-          countOfWords++;
-        }
-        if (countOfWords>maxCountOfWords){
-          maxCountOfWords = countOfWords;
-          keY = shift;
-        }
-      }
-      System.out.println("at line 53");
-    }
-    CaesarCipher toReturn = new CaesarCipher(keY);
-    System.out.println("at line 56");
-    return toReturn.decrypt(realCT);
-    /*
-    realCT = processText(realCT);
-    int countOfWords = 0;
-    int maxCountOfWords = 0;
-    int keY;
-    int a = (realCT.length()-1)/4 + 1; //how many 'words' can be made if a space is made every 4 chars
-    String[] ctWords = new String[a]; //if it divides evenly into 4 there is no need. but if it doesn't add 1, so j do realCT.length()-1
-    for (int shift = 0; shift<26; shift++){
-      countOfWords = 0;
-      String ct;
-      for (int l = 0; l<realCT.length(); l++){ //encrypt based on given key
-        char encChar = (char) 65 + (ct.charAt(l) - 65 + shift)%26;
-        ct = ct.substring(0, l) + encChar + ct.substring(l+1, ct.length());
-      }
-      for (int i = 0; i<=a; i++){ //adds arbitrary spaces. not arbitrary its every 4, but i just choose every 4 on a whim.
-        if (i==a){ //this is for our analyzation
-          ctWords[i] += ct.substring(i, ct.length());
+  //pre-condition: ct is already processed. a big part of this method is dealing w the fact that there are no spaces
+  public static String keylessDecrypt(String ct) throws FileNotFoundException{ //bc isWord() throws this
+    ArrayList<Integer> numWords = new ArrayList<Integer>(26);
+    for (int i = 0; i<26; i++){
+      CaesarCipher testing = new CaesarCipher(i);
+      String test = testing.decrypt(ct);
+      int currentCount = 0; //InS stands for indexSpances
+      ArrayList<Integer> inS = new ArrayList<Integer>; //idk if this would be better suited with a linked list. maybe!
+      inS.add(1);
+      boolean done = false;
+      while(!done){
+        if (inS.get(0) >= 10 || .get(inS.size()-1)>test.length()-3){ //if you've tried different first words too much or you're at the ~end of the text
+          done = true;
         }else{
-          ctWords[i] = ct.substring(i, i+5);
+          for (int k = 1; k<11; k++){ //max trial word length is 10 letters
+            if (isWord(pt.substring(inS.get(inS.size()-1), inS.get((inS.size()-1)+k)))){
+              currentCount++;
+              inS.add(inS.get((inS.size()-1)+k));
+              k = 11;
+            }else if(k==10){//try to re-adjust
+              for (int f = 1; f<11; f++){
+                if (isWord(pt.substring(inS.get(inS.size()-2), inS.get(inS.size()-1)+f))){
+                  inS.set(size()-1, inS.get(inS.size()-1) + f);
+                  f = 11;
+                }
+                if (f==10){
+                  inS.remove(size()-1);
+                  f=1;
+                  if(inS.size() == 0){
+                    f = 11;
+                    done = true;
+                  }
+                }
+              }
+            }
+          }
         }
       }
-      for (String s : ctWords){
-        if (isWord(s)){ //isWord in cipher.java. Scans a file of 10,000 most common words and sees if s is .equal to one of them
-          countOfWords++;
-        }
-        if (countOfWords>maxCountOfWords){//if with this key there are more actualy words than there had been before, update this key as the one to decrypt w
-          maxCountOfWords = countOfWords;
-          keY = shift;
-        }
-      }
+    numWords.add(currentCount);
     }
-    //once we figure out what is most likely to be the right shift key,
-    CaesarCipher toReturn = new CaesarCipher(keY);
-    return toReturn.decrypt(ct); //a quicker way to do this is to run a loop 26 times, make a new object every time,
-    //decrypt w index of for look in that object and then do the spaces and checks
-    //fakeSpace.trim();
-    */
+    int key = numWords.indexOf(collections.max(numWords));
+    CaesarCipher toReturn = new CaesarCipher(key);
+    return toReturn.decrypt(ct);
+
 
   }
   public char[][] genGrid(){

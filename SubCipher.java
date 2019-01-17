@@ -89,7 +89,7 @@ public class SubCipher extends PolySubCipher{
     //and each time split it up every 4 characters, and run each word thru a method called "isWord", and have a counter counting
     //how many of the created words are actually words. The solution w the most actual words can be returned, with the spaces removed
     //i think this is a good rudimentary way to approach keylessDecryption
-    return "hi";
+    return "subCipher";
   }
 
   public String toString() {

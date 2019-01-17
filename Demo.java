@@ -73,6 +73,7 @@ public class Demo {
           preset.nextLine();
           System.out.println("Enter your ciphertext: (you don't have to have inputted its key when making the cipher!) ");///
           System.out.println("\nPlaintext: " + toRun.keylessDecrypt(preset.nextLine())); //it does not need to be called on an object, tho it can be
+          System.out.println("can you see it ^^");
         }catch(FileNotFoundException e){
           quit("Problem with words1000.txt! QUITTING");
         }
