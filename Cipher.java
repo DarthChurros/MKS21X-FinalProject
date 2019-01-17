@@ -7,12 +7,10 @@ public abstract class Cipher {
   private int key;
   private String keyword;
   private String name;
-  private static ArrayList<String> words;
 
   public Cipher(int keyNum, String keyStr) {
     key = keyNum;
     keyword = processText(keyStr);
-
   }
 
   public abstract String encrypt(String plaintext);
@@ -45,16 +43,17 @@ public abstract class Cipher {
   }
 
   public static boolean isWord(String text) {
-    if (words == null) {
-      try {
-        Scanner wordReader = new Scanner(new File("words1000.txt"));
-        words = ArrayList<String>();
-        while(wordReader.hasNext()) {
-          words.add(wordReader.next());
+    try {
+      Scanner wordReader = new Scanner(new File("words1000.txt"));
+      words = new ArrayList<String>();
+      while(wordReader.hasNext()) {
+        if (words.next().equals(text)) {
+          return true;
         }
-      } catch (FileNotFoundException e) {
-        
       }
+      return false;
+    } catch (FileNotFoundException e) {
+      return false;
     }
   }
 }
