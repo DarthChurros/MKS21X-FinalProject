@@ -26,8 +26,8 @@ public class CaesarCipher extends SubCipher{
     try{
       System.out.println("Testing");
       CaesarCipher test = new CaesarCipher(5);
-      String a = test.encrypt("Hello, how are you");
-      System.out.println("This is what \"Hello, how are you\" looks like w a shift of 5: " + a);
+      String a = test.encrypt("Below Belt Athletic");
+      System.out.println("This is what \"Below Belt Athletic\" looks like w a shift of 5: " + a);
       System.out.println("This is what ^^ text looks like decrypted: " + test.decrypt(a));
       System.out.println("This is what the decryption of the cihpertext looks like when the key is not given: " + keylessDecrypt(a));
     }catch(FileNotFoundException e){

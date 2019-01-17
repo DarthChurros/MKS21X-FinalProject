@@ -32,6 +32,7 @@ public abstract class Cipher {
     while (wordList.hasNextLine()){
       current = wordList.nextLine();
       //System.out.println("against " + current);
+      current = current.toLowerCase();
       if (current.equals(word_)){
         wordList.close();
         return true;
