@@ -49,47 +49,56 @@ public class CaesarCipher extends SubCipher{
       boolean done = false; //WHAT YOU FORGOT IS THAT WORDS1000.TXT IS IN ALL LOWERCASE! IN ISWORD, TURN WORD INTO UPPER CASE
       boolean didOnce = false;
       while(!done){ //this second part of the if statement is probably very faulty for short sentences
-        if (inS.get(0) == 0 && didOnce || inS.get(inS.size()-1)>test.length()-3){ //if you've tried different first words too much or you're at the ~end of the text
+        if (inS.size() == 1 && didOnce || inS.get(inS.size()-1)>test.length()-3){ //if you've tried different first words too much or you're at the ~end of the text
           done = true; //if you've gone all the way back to the first 'word' unable to find a better path, you're done
                       //or if the last space is very close to the end
         }else{
           for (int k = 1; k<11; k++){ //max trial word length is 10 letters
-            System.out.println("How many words we've made so far:" + inS.size());
-            System.out.println("Where the first letters of these words are:" + inS);
-            String testingWord = test.substring(inS.get(inS.size()-1), inS.get((inS.size()-1))+k);
-            System.out.println("CHECKING IF THIS WORD IS WORD: " + testingWord);
-            if ((testingWord.length() > 1 || testingWord.equals("A") || testingWord.equals("I"))&& isWord(testingWord)){ //have to check length bc in words1000.txt
-              System.out.println("Word works!");
-              currentCount++; //if you made a word, add to the current count
-              inS.add(inS.get((inS.size()-1))+k); //add this new start character to scan so next time u go thru this u will scna the next word
-              k = 11; //get out of this for loop so you can try again
-              System.out.println("Has this updated? " + inS);
-              //System.out.println(testingWord + "(CHECK)");
-            }else if(k==10){//try to re-adjust
-              if (inS.size() == 1){
-                k = 11;
-              }else{
-                if (currentCount > maxCount){
-                  maxCount = currentCount; //store this before you go back on ur words
-                }
-                for (int f = 1; f<11; f++){ //go back and try to set a new word. If there is no new word by modifying the word before the one you just tested,
-                  if (isWord(test.substring(inS.get(inS.size()-2), inS.get(inS.size()-1)+f))){ //go back and check the one before keep going
-                    inS.set(inS.size()-1, inS.get(inS.size()-1) + f); //you don't need to remove any words from currentCount, b/c u still have the same amount j one word is different
-                    f = 11;
-                  }
-                  if (f==10){ //if you didn't find a word, remove the word you just worked on
-                    inS.remove(inS.size()-1);
-                    currentCount--; //since you're going back on your list of indexes to start new words, remove one
-                    f=1; //restart the loop
-                    if(inS.size() == 0){
-                      f = 11; //if you went back to the end of string w no words possible, you're done
-                      done = true;
+            if (inS.get((inS.size()-1))+k < ct.length()){
+              System.out.println("How many words we've made so far:" + inS.size());
+              System.out.println("Where the first letters of these words are:" + inS);
+              String testingWord = test.substring(inS.get(inS.size()-1), inS.get((inS.size()-1))+k);
+              System.out.println("CHECKING IF THIS WORD IS WORD: " + testingWord);
+              if ((testingWord.length() > 1 || testingWord.equals("A") || testingWord.equals("I"))&& isWord(testingWord)){ //have to check length bc in words1000.txt
+                System.out.println("Word works!");
+                currentCount++; //if you made a word, add to the current count
+                inS.add(inS.get((inS.size()-1))+k); //add this new start character to scan so next time u go thru this u will scna the next word
+                k = 11; //get out of this for loop so you can try again
+                System.out.println("Has this updated? " + inS);
+                //System.out.println(testingWord + "(CHECK)");
+              }else if(k==10){//try to re-adjust
+                if (inS.size() == 1){
+                  k = 11;
+                }else{
+                  System.out.println("we are resizing the previous word and checking");
+                  if (currentCount > maxCount){
+                    maxCount = currentCount; //store this before you go back on ur words
+                  }//PROBLEM BELOW --> INDEX OUT OF BOUNDS
+                  for (int f = 1; f<11; f++){ //go back and try to set a new word. If there is no new word by modifying the word before the one you just tested,
+                    //System.out.println("");
+                    System.out.println("Current size: " + inS.size());
+                    String nextTest = test.substring(inS.get(inS.size()-2), //problem here!
+                                                     inS.get(inS.size()-1)+f);
+                    if (isWord(nextTest)){ //go back and check the one before keep going
+                      inS.set(inS.size()-1, inS.get(inS.size()-1) + f); //you don't need to remove any words from currentCount, b/c u still have the same amount j one word is different
+                      f = 11;
+                    }
+                    if (f==10){ //if you didn't find a word, remove the word you just worked on
+                      inS.remove(inS.size()-1);
+                      currentCount--; //since you're going back on your list of indexes to start new words, remove one
+                      f=1; //restart the loop
+                      if(inS.size() == 1){
+                        f = 11; //if you went back to the end of string w no words possible, you're done
+                        done = true;
+                      }
                     }
                   }
                 }
               }
+              didOnce = true; //this is to see, if you've gone thru the first letter 10 times trying to make a word and it hasn't worked, you've tried already too much -- go on to next key
+            }else{
+              done = true;
             }
-            didOnce = true; //this is to see, if you've gone thru the first letter 10 times trying to make a word and it hasn't worked, you've tried already too much -- go on to next key
           }
         }
       }
