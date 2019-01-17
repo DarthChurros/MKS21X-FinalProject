@@ -27,6 +27,7 @@ public abstract class Cipher {
     File f = new File("words1000.txt");
     Scanner wordList = new Scanner(f);
     String current;
+    word = word.toUpperCase();
     while (wordList.hasNextLine()){
       current = wordList.nextLine();
       if (current.equals(word)){
@@ -47,7 +48,7 @@ public abstract class Cipher {
     //and each time split it up every 4 characters, and run each word thru a method called "isWord", and have a counter counting
     //how many of the created words are actually words. The solution w the most actual words can be returned, with the spaces removed
     //i think this is a good rudimentary way to approach keylessDecryption
-    return "";
+    return "cipher.java";
   }
 
 
