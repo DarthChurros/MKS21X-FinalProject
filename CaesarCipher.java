@@ -26,8 +26,8 @@ public class CaesarCipher extends SubCipher{
     try{
       System.out.println("Testing");
       CaesarCipher test = new CaesarCipher(5);
-      String a = test.encrypt("Below Belt Athletic");
-      System.out.println("This is what \"Below Belt Athletic\" looks like w a shift of 5: " + a);
+      String a = test.encrypt("The table spoon is on the table.");
+      System.out.println("This is what \"The table spoon is on the table.\" looks like w a shift of 5: " + a);
       System.out.println("This is what ^^ text looks like decrypted: " + test.decrypt(a));
       System.out.println("This is what the decryption of the cihpertext looks like when the key is not given: " + keylessDecrypt(a));
     }catch(FileNotFoundException e){
@@ -43,7 +43,7 @@ public class CaesarCipher extends SubCipher{
       CaesarCipher testing = new CaesarCipher(i); //instantiate a new caesarcipher object
       String test = testing.decrypt(ct); //decrypt the ct based on the current key
       int maxCount = 0;
-      int currentCount = 0; //InS stands for indexSpances. Also make the currentCount 0 -- this counts how many words
+      //int currentCount = 0; //InS stands for indexSpances. Also make the currentCount 0 -- this counts how many words
       ArrayList<Integer> inS = new ArrayList<Integer>(); //idk if this would be better suited with a linked list. maybe!
       inS.add(0); //consider the first letter as a word.
       boolean done = false; //WHAT YOU FORGOT IS THAT WORDS1000.TXT IS IN ALL LOWERCASE! IN ISWORD, TURN WORD INTO UPPER CASE
@@ -61,7 +61,7 @@ public class CaesarCipher extends SubCipher{
               System.out.println("CHECKING IF THIS WORD IS WORD: " + testingWord);
               if ((testingWord.length() > 1 || testingWord.equals("A") || testingWord.equals("I"))&& isWord(testingWord)){ //have to check length bc in words1000.txt
                 System.out.println("Word works!");
-                currentCount++; //if you made a word, add to the current count
+                //currentCount++; //if you made a word, add to the current count
                 inS.add(inS.get((inS.size()-1))+k); //add this new start character to scan so next time u go thru this u will scna the next word
                 k = 11; //get out of this for loop so you can try again
                 System.out.println("Has this updated? " + inS);
@@ -71,8 +71,8 @@ public class CaesarCipher extends SubCipher{
                   k = 11;
                 }else{
                   System.out.println("we are resizing the previous word and checking");
-                  if (currentCount > maxCount){
-                    maxCount = currentCount; //store this before you go back on ur words
+                  if (inS.size() > maxCount){
+                    maxCount = inS.size(); //store this before you go back on ur words
                   }//PROBLEM BELOW --> INDEX OUT OF BOUNDS
                   for (int f = 1; f<11; f++){ //go back and try to set a new word. If there is no new word by modifying the word before the one you just tested,
                     //System.out.println("");
@@ -85,7 +85,7 @@ public class CaesarCipher extends SubCipher{
                     }
                     if (f==10){ //if you didn't find a word, remove the word you just worked on
                       inS.remove(inS.size()-1);
-                      currentCount--; //since you're going back on your list of indexes to start new words, remove one
+                      //currentCount--; //since you're going back on your list of indexes to start new words, remove one
                       f=1; //restart the loop
                       if(inS.size() == 1){
                         f = 11; //if you went back to the end of string w no words possible, you're done
@@ -102,12 +102,12 @@ public class CaesarCipher extends SubCipher{
           }
         }
       }
-    numWords.add(currentCount); //add the final word count
+    numWords.add(inS.size()); //add the final word count
     }
     System.out.println("max number of words:" + Collections.max(numWords));
-    int key = numWords.indexOf(Collections.max(numWords)); //return the pt decrypted w the highest key in numWords
-    System.out.println("key" + key);
-    CaesarCipher toReturn = new CaesarCipher(key);
+    int key_ = numWords.indexOf(Collections.max(numWords)); //return the pt decrypted w the highest key in numWords
+    System.out.println("key" + key_);
+    CaesarCipher toReturn = new CaesarCipher(key_);
     return toReturn.decrypt(ct);
     //return "ugh";
 
