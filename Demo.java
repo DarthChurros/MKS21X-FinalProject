@@ -19,6 +19,7 @@ public class Demo {
       System.out.println("\t[1] Add a cipher");
       System.out.println("\t[2] Remove a cipher");
       System.out.println("\t[3] Run a cipher");
+      System.out.println("\t[4] Run keyless decryption (EXPERIMENTAL)");
 
       switch (in.next()) {
         case "1":
@@ -44,6 +45,17 @@ public class Demo {
           System.out.println("\nRunning " + ciphers.get(toRun) + "\n");
           runCipher(ciphers.get(toRun), in);
           break;
+        case "4":
+          System.out.println("\nOn which cipher would you like to attempt decryption?");
+          System.out.println("\t[1] Substitution Cipher");
+          System.out.println("\t[2] Caesar Cipher");
+          System.out.println("\t[3] Vigenere Cipher");
+          System.out.println("\t[4] Book Cipher");
+          System.out.println("\t[5] Rail-Fence Cipher");
+          System.out.println("\t[6] Autokey Cipher\n");
+          int toRun = in.nextInt()-1;
+          System.out.println("\nEnter your ciphertext: \n");
+          System.out.println("\nPlaintext: "+to);
         default:
           quit("Invalid selection! QUITTING");
       }
