@@ -27,10 +27,12 @@ public abstract class Cipher {
     File f = new File("words1000.txt");
     Scanner wordList = new Scanner(f);
     String current;
-    word = word.toUpperCase();
+    String word_ = word.toLowerCase();
+    //System.out.println("testing " + word_);
     while (wordList.hasNextLine()){
       current = wordList.nextLine();
-      if (current.equals(word)){
+      //System.out.println("against " + current);
+      if (current.equals(word_)){
         wordList.close();
         return true;
       }

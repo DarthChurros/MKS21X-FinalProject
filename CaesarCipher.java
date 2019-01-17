@@ -39,6 +39,7 @@ public class CaesarCipher extends SubCipher{
   public static String keylessDecrypt(String ct) throws FileNotFoundException{ //bc isWord() throws this
     ArrayList<Integer> numWords = new ArrayList<Integer>(26); //the highest val in this list, its index is the right shift key
     for (int i = 0; i<26; i++){ //for every possible shift key:
+      System.out.println("\n\n CURRENT KEY " + i);
       CaesarCipher testing = new CaesarCipher(i); //instantiate a new caesarcipher object
       String test = testing.decrypt(ct); //decrypt the ct based on the current key
       int maxCount = 0;
@@ -53,14 +54,17 @@ public class CaesarCipher extends SubCipher{
                       //or if the last space is very close to the end
         }else{
           for (int k = 1; k<11; k++){ //max trial word length is 10 letters
-            System.out.println(inS.size());
-            System.out.println(inS);
+            System.out.println("How many words we've made so far:" + inS.size());
+            System.out.println("Where the first letters of these words are:" + inS);
             String testingWord = test.substring(inS.get(inS.size()-1), inS.get((inS.size()-1))+k);
-            System.out.println(testingWord);
-            if (isWord(testingWord)){
+            System.out.println("CHECKING IF THIS WORD IS WORD: " + testingWord);
+            if ((testingWord.length() > 1 || testingWord.equals("A") || testingWord.equals("I"))&& isWord(testingWord)){ //have to check length bc in words1000.txt
+              System.out.println("Word works!");
               currentCount++; //if you made a word, add to the current count
-              inS.add(inS.get((inS.size()-1)+k)); //add this new start character to scan so next time u go thru this u will scna the next word
+              inS.add(inS.get((inS.size()-1))+k); //add this new start character to scan so next time u go thru this u will scna the next word
               k = 11; //get out of this for loop so you can try again
+              System.out.println("Has this updated? " + inS);
+              //System.out.println(testingWord + "(CHECK)");
             }else if(k==10){//try to re-adjust
               if (inS.size() == 1){
                 k = 11;
@@ -91,7 +95,9 @@ public class CaesarCipher extends SubCipher{
       }
     numWords.add(currentCount); //add the final word count
     }
+    System.out.println("max number of words:" + Collections.max(numWords));
     int key = numWords.indexOf(Collections.max(numWords)); //return the pt decrypted w the highest key in numWords
+    System.out.println("key" + key);
     CaesarCipher toReturn = new CaesarCipher(key);
     return toReturn.decrypt(ct);
     //return "ugh";
