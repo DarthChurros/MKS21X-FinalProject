@@ -53,9 +53,28 @@ public class Demo {
           System.out.println("\t[4] Book Cipher");
           System.out.println("\t[5] Rail-Fence Cipher");
           System.out.println("\t[6] Autokey Cipher\n");
-          int toRun = in.nextInt()-1;
+          int type = in.nextInt();
           System.out.println("\nEnter your ciphertext: \n");
-          System.out.println("\nPlaintext: "+to);
+          in.nextLine();
+          String pt = in.nextLine();
+          switch (type) {
+            case 1: System.out.print(SubCipher.keyless(pt));
+            break;
+            case 2: System.out.print(CaesarCipher.keyless(pt));
+            break;
+            case 3: System.out.print(VigenereCipher.keyless(pt));
+            break;
+            case 4: System.out.print(BookCipher.keyless(pt));
+            break;
+            case 5: System.out.print(RailFenceCipher.keyless(pt));
+            break;
+            case 6: System.out.print(AutokeyCipher.keyless(pt));
+            break;
+            default: quit("Invalid cipher! QUITTING");
+          }
+          System.out.print("\nPlaintext: ");
+          System.out.println();
+          break;
         default:
           quit("Invalid selection! QUITTING");
       }

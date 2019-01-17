@@ -32,4 +32,8 @@ public abstract class Cipher {
     }
     return text.toUpperCase();
   }
+
+  public static String keyless(String ciphertext) {
+    return ciphertext;
+  }
 }
