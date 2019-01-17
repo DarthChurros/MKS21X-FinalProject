@@ -26,8 +26,8 @@ public class CaesarCipher extends SubCipher{
     try{
       System.out.println("Testing");
       CaesarCipher test = new CaesarCipher(5);
-      String a = test.encrypt("The table spoon is on the table.");
-      System.out.println("This is what \"The table spoon is on the table.\" looks like w a shift of 5: " + a);
+      String a = test.encrypt("At the theatre thirty year olds toss tongues");
+      System.out.println("This is what \"At the theatre thirty year olds toss tongues\" looks like w a shift of 5: " + a);
       System.out.println("This is what ^^ text looks like decrypted: " + test.decrypt(a));
       System.out.println("This is what the decryption of the cihpertext looks like when the key is not given: " + keylessDecrypt(a));
     }catch(FileNotFoundException e){
@@ -72,7 +72,9 @@ public class CaesarCipher extends SubCipher{
                 }else{
                   System.out.println("we are resizing the previous word and checking");
                   if (inS.size() > maxCount){
+                    System.out.println("\nReplaced maxCount (" + maxCount + ") with inS.size() (" + inS.size() + ")");
                     maxCount = inS.size(); //store this before you go back on ur words
+                    System.out.println("maxCount is now: " + maxCount + "\n");
                   }//PROBLEM BELOW --> INDEX OUT OF BOUNDS
                   for (int f = 1; f<11; f++){ //go back and try to set a new word. If there is no new word by modifying the word before the one you just tested,
                     //System.out.println("");
@@ -102,7 +104,8 @@ public class CaesarCipher extends SubCipher{
           }
         }
       }
-    numWords.add(inS.size()); //add the final word count
+    numWords.add(maxCount); //add the final word count
+    System.out.println("numWords looks like: " + numWords);
     }
     System.out.println("max number of words:" + Collections.max(numWords));
     int key_ = numWords.indexOf(Collections.max(numWords)); //return the pt decrypted w the highest key in numWords
