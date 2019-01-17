@@ -60,3 +60,9 @@ jan 15 2018:
 big note: a linux-specific bug: bookcipher can't process the name of the text file bc linux is case sensitive
 mac isn't. so processing the keyword input on mac is no issue, doing so on linux means you can only
 use text files w titles in all-caps
+
+jan 16, 2018:
+alma -- spent a lot of time trying to rewrite keylessDecrypt for caesarCipher in a 
+way that can decrypt encrypted text that has no spaces. might work and might not work. will check tomorrow
+tejas -- editing alma's edits to demo so that the user can choose keyless decryption
+before having instantiated an instance of a certain cipher
