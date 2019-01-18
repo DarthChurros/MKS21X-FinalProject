@@ -66,3 +66,9 @@ alma -- spent a lot of time trying to rewrite keylessDecrypt for caesarCipher in
 way that can decrypt encrypted text that has no spaces. might work and might not work. will check tomorrow
 tejas -- editing alma's edits to demo so that the user can choose keyless decryption
 before having instantiated an instance of a certain cipher
+
+jan 17, 2018:
+FINALLY GOT KEYLESSDECRYPT FOR CAESARCIPHER TO WORK MOST OF THE TIME!!!!!
+Still should go ahead and package what's written there are a method that can be used in subCipher, just 
+more times (since tejas needs to do letter frequency analysis; i just need to cycle through 26 possible keys)
+
