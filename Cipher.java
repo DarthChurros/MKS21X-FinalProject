@@ -39,15 +39,15 @@ public abstract class Cipher {
   }
 
   public static String keyless(String ciphertext) {
+    isText(ciphertext);
     return ciphertext;
   }
 
   public static boolean isWord(String text) {
     try {
       Scanner wordReader = new Scanner(new File("words1000.txt"));
-      words = new ArrayList<String>();
       while(wordReader.hasNext()) {
-        if (words.next().equals(text)) {
+        if (wordReader.next().equals(text)) {
           return true;
         }
       }
@@ -55,5 +55,20 @@ public abstract class Cipher {
     } catch (FileNotFoundException e) {
       return false;
     }
+  }
+
+  public static boolean isText(String text) {
+    ArrayList<Integer> starts = new ArrayList<Integer>();
+    int last = 0;
+    starts.add(0);
+    while (starts.get(starts.size()-1) + last < text.length()) {
+      if (isWord(text.substring(starts.get(starts.size()-1),last))) {
+        System.out.println("start = " +  (starts.get(starts.size()-1)) + ", end = " + last);
+        System.out.println(text.substring(starts.get(starts.size()-1),last) + " is a word");
+        starts.add(last);
+      }
+      last++;
+    }
+    return false;
   }
 }
