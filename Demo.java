@@ -73,9 +73,10 @@ public class Demo {
           preset.nextLine();
           System.out.println("Enter your ciphertext: (you don't have to have inputted its key when making the cipher!) ");///
           String a = preset.nextLine();
-          System.out.println("What you just inputtedL: " + a);
-          System.out.println("\nPlaintext: " + toRun.keylessDecrypt(a) +", it was called"); //it does not need to be called on an object, tho it can be
-          System.out.println("can you see it ^^");
+          System.out.println("What you just inputted: " + a); //so i'm not not taking the right input
+          //System.out.println()
+          System.out.println("\nPlaintext: " + CaesarCipher.keylessDecrypt(a)); //it does not need to be called on an object, tho it can be
+        //  System.out.println("can you see it ^^"); //and ^ words. so how come toRun.keylessDecrypt(a) isn't return anything??? is it not running??????
         }catch(FileNotFoundException e){
           quit("Problem with words1000.txt! QUITTING");
         }

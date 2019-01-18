@@ -26,8 +26,8 @@ public class CaesarCipher extends SubCipher{
     try{
       System.out.println("Testing");
       CaesarCipher test = new CaesarCipher(5);
-      String a = test.encrypt("At the theatre thirty year olds toss tongues");
-      System.out.println("This is what \"At the theatre thirty year olds toss tongues\" looks like w a shift of 5: " + a);
+      String a = test.encrypt("Unfortunately, tremendous transportation usually sucks");
+      System.out.println("This is what \"Unfortunately, tremendous transportation usually sucks\" looks like w a shift of 5: " + a);
       System.out.println("This is what ^^ text looks like decrypted: " + test.decrypt(a));
       System.out.println("This is what the decryption of the cihpertext looks like when the key is not given: " + keylessDecrypt(a));
     }catch(FileNotFoundException e){
@@ -53,7 +53,7 @@ public class CaesarCipher extends SubCipher{
           done = true; //if you've gone all the way back to the first 'word' unable to find a better path, you're done
                       //or if the last space is very close to the end
         }else{
-          for (int k = 1; k<11; k++){ //max trial word length is 10 letters
+          for (int k = 1; k<15; k++){ //max trial word length is 10 letters
             if (inS.get((inS.size()-1))+k < ct.length()){
               System.out.println("How many words we've made so far:" + inS.size());
               System.out.println("Where the first letters of these words are:" + inS);
@@ -63,12 +63,12 @@ public class CaesarCipher extends SubCipher{
                 System.out.println("Word works!");
                 //currentCount++; //if you made a word, add to the current count
                 inS.add(inS.get((inS.size()-1))+k); //add this new start character to scan so next time u go thru this u will scna the next word
-                k = 11; //get out of this for loop so you can try again
+                k = 14; //get out of this for loop so you can try again
                 System.out.println("Has this updated? " + inS);
                 //System.out.println(testingWord + "(CHECK)");
-              }else if(k==10){//try to re-adjust
+              }else if(k==13){//try to re-adjust
                 if (inS.size() == 1){
-                  k = 11;
+                  k = 14;
                 }else{
                   System.out.println("we are resizing the previous word and checking");
                   if (inS.size() > maxCount){
@@ -76,21 +76,21 @@ public class CaesarCipher extends SubCipher{
                     maxCount = inS.size(); //store this before you go back on ur words
                     System.out.println("maxCount is now: " + maxCount + "\n");
                   }//PROBLEM BELOW --> INDEX OUT OF BOUNDS
-                  for (int f = 1; f<11; f++){ //go back and try to set a new word. If there is no new word by modifying the word before the one you just tested,
+                  for (int f = 1; f<15; f++){ //go back and try to set a new word. If there is no new word by modifying the word before the one you just tested,
                     //System.out.println("");
                     System.out.println("Current size: " + inS.size());
                     String nextTest = test.substring(inS.get(inS.size()-2), //problem here!
                                                      inS.get(inS.size()-1)+f);
                     if (isWord(nextTest)){ //go back and check the one before keep going
                       inS.set(inS.size()-1, inS.get(inS.size()-1) + f); //you don't need to remove any words from currentCount, b/c u still have the same amount j one word is different
-                      f = 11;
+                      f = 14;
                     }
-                    if (f==10){ //if you didn't find a word, remove the word you just worked on
+                    if (f==13){ //if you didn't find a word, remove the word you just worked on
                       inS.remove(inS.size()-1);
                       //currentCount--; //since you're going back on your list of indexes to start new words, remove one
                       f=1; //restart the loop
                       if(inS.size() == 1){
-                        f = 11; //if you went back to the end of string w no words possible, you're done
+                        f = 14; //if you went back to the end of string w no words possible, you're done
                         done = true;
                       }
                     }
@@ -100,6 +100,9 @@ public class CaesarCipher extends SubCipher{
               didOnce = true; //this is to see, if you've gone thru the first letter 10 times trying to make a word and it hasn't worked, you've tried already too much -- go on to next key
             }else{
               done = true;
+            }
+            if (inS.size() > maxCount){
+              maxCount = inS.size();
             }
           }
         }
