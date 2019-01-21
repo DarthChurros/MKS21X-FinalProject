@@ -59,22 +59,26 @@ public abstract class Cipher {
 
   public static boolean isText(String text) {
     try {
+      long start = System.nanoTime();
       ArrayList<String> words = new ArrayList<String>(); //words created by the splitting of the text
       words.add(text); //words should always end in the remaining text
-      for (int i = 0; i < words.get(words.size()-1).length(); i++) { //going through each letter in the last element
+      for (int i = 0; i <= words.get(words.size()-1).length(); i++) { //going through each letter in the last element
         if (isWord(words.get(words.size()-1).substring(0,i))) { //if the first part of the last element is a word
-          System.out.println(words.get(words.size()-1).substring(0,i)+" is a word");
+          //System.out.println(words.get(words.size()-1).substring(0,i)+" is a word");
           words.add(words.size()-1,words.get(words.size()-1).substring(0,i)); //add that word to the list
           words.set(words.size()-1,words.get(words.size()-1).substring(i,words.get(words.size()-1).length())); //remove that portion from the remaining text
           i = 0;
-        } else if (i == words.get(words.size()-1).length()-1) { //if the fragment isn't a word and we are at the last letter
+        } else if (i == Math.min(13,words.get(words.size()-1).length())) { //if the fragment isn't a word and we are at the last letter
           int last = words.get(words.size()-2).length();
-          System.out.println("reached end, reverting i to "+last);
+          //System.out.println("reached end, reverting i to "+last);
           words.set(words.size()-1,words.get(words.size()-2)+words.get(words.size()-1));
           words.remove(words.size()-2);
           i = last;
         }
-        System.out.println(words +" at i="+i);
+        //System.out.println(words +" at i="+i);
+        if (System.nanoTime() - start > 20000000000L) {
+          return false;
+        }
       }
       return true;
     } catch (IndexOutOfBoundsException e) {
