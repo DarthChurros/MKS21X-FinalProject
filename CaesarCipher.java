@@ -21,7 +21,7 @@ public class CaesarCipher extends SubCipher{
   public CaesarCipher(int k){
     super(k); //k is the shift amount
   }
-
+/*
   public static void main(String[] args){
     try{
       System.out.println("Testing");
@@ -34,9 +34,10 @@ public class CaesarCipher extends SubCipher{
       System.out.println("words1000.txt doesn't exist!");
     }
   }
-
+*/
   //pre-condition: ct is already processed. a big part of this method is dealing w the fact that there are no spaces
-  public static String keylessDecrypt(String ct) throws FileNotFoundException{ //bc isWord() throws this
+  public static String keyless(String ct) throws FileNotFoundException{ //bc isWord() throws this
+    ct = processText(ct);
     ArrayList<Integer> numWords = new ArrayList<Integer>(26); //the highest val in this list, its index is the right shift key
     for (int i = 0; i<26; i++){ //for every possible shift key:
       System.out.println("\n\n CURRENT KEY " + i);

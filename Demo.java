@@ -19,6 +19,7 @@ public class Demo {
       System.out.println("\t[1] Add a cipher");
       System.out.println("\t[2] Remove a cipher");
       System.out.println("\t[3] Run a cipher");
+      System.out.println("\t[4] Run keyless decryption (EXPERIMENTAL)");
 
       switch (in.next()) {
         case "1":
@@ -26,7 +27,7 @@ public class Demo {
           break;
         case "2":
           if (ciphers.size() == 0) {
-            System.out.println("\nYou don't have any ciphers to remove!"); //where does the user go if this is the case --> i see, it goes to asking you waht to do cuz running is true!
+            System.out.println("\nYou don't have any ciphers to remove!");
           } else {
             System.out.println("\nWhich cipher would you like to remove?\n");
             for (int i = 0; i < ciphers.size(); i++) {
@@ -40,10 +41,54 @@ public class Demo {
           for (int i = 0; i < ciphers.size(); i++) {
             System.out.println("\t["+(i+1)+"] " + ciphers.get(i));
           }
-          //System.out.prinln("\t[" + ciphers.size() +"]" + "Keyless Decryption (specify cipher soon)")
           int toRun = in.nextInt()-1;
           System.out.println("\nRunning " + ciphers.get(toRun) + "\n");
           runCipher(ciphers.get(toRun), in);
+          break;
+        case "4":
+          System.out.println("\nOn which cipher would you like to attempt decryption?");
+          System.out.println("\t[1] Substitution Cipher");
+          System.out.println("\t[2] Caesar Cipher");
+          System.out.println("\t[3] Vigenere Cipher");
+          System.out.println("\t[4] Book Cipher");
+          System.out.println("\t[5] Rail-Fence Cipher");
+          System.out.println("\t[6] Autokey Cipher\n");
+          int type = in.nextInt();
+          System.out.println("\nEnter your ciphertext: \n");
+          in.nextLine();
+          String pt = in.nextLine();
+          System.out.print("\nPlaintext: ");
+          switch (type) {
+              case 1:
+              try{
+                System.out.print(SubCipher.keyless(pt));
+                break;
+              }catch(FileNotFoundException e){
+                System.out.println("problem with words1000.txt");
+              }
+              case 2:
+              try{
+                System.out.print(CaesarCipher.keyless(pt));
+                break;
+              }catch(FileNotFoundException e){
+                System.out.println("problem with words1000.txt");
+              }
+              case 3: //System.out.print(VigenereCipher.keyless(pt));
+              break;
+              case 4: //System.out.print(BookCipher.keyless(pt));
+              break;
+              case 5:
+              try{
+                System.out.print(RailFenceCipher.keyless(pt));
+                break;
+              }catch(FileNotFoundException e){
+                System.out.println("Problem with words1000.txt");
+              }
+              case 6: //System.out.print(AutokeyCipher.keyless(pt));
+              break;
+              default: quit("Invalid cipher! QUITTING");
+          }
+          System.out.println();
           break;
         default:
           quit("Invalid selection! QUITTING");
@@ -54,8 +99,7 @@ public class Demo {
   public static void runCipher(Cipher toRun, Scanner preset) {
     System.out.println("\nSelect a function: \n");
     System.out.println("\t[1] Encryption");
-    System.out.println("\t[2] Decryption");
-    System.out.println("\t[3] Keyless Decryption (only have for CaesarCipher!)\n");
+    System.out.println("\t[2] Decryption\n");
 
     switch(preset.next()) {
       case "1":
@@ -67,19 +111,6 @@ public class Demo {
         preset.nextLine();
         System.out.println("Enter your ciphertext: ");
         System.out.println("\nPlaintext: " + toRun.decrypt(preset.nextLine()));
-        break;
-      case "3":
-        try{
-          preset.nextLine();
-          System.out.println("Enter your ciphertext: (you don't have to have inputted its key when making the cipher!) ");///
-          String a = preset.nextLine();
-          System.out.println("What you just inputted: " + a); //so i'm not not taking the right input
-          //System.out.println()
-          System.out.println("\nPlaintext: " + CaesarCipher.keylessDecrypt(a)); //it does not need to be called on an object, tho it can be
-        //  System.out.println("can you see it ^^"); //and ^ words. so how come toRun.keylessDecrypt(a) isn't return anything??? is it not running??????
-        }catch(FileNotFoundException e){
-          quit("Problem with words1000.txt! QUITTING");
-        }
         break;
       default:
         quit("Invalid selection! QUITTING");
@@ -133,7 +164,7 @@ public class Demo {
           quit("input a int please! QUITTING");
         }
       case "5":
-        System.out.println("\nSelect the height of your fence  (int) and specify the text to encrypt for the RailFenceCipher!\n");
+        System.out.println("\nSelect the height of your fence  (int) and specify the text to encrypt for the RailFenceCipher! (on seperate lines please)\n");
         String a = preset.next();
         preset.nextLine();
         String b = preset.nextLine();
