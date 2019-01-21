@@ -72,3 +72,7 @@ FINALLY GOT KEYLESSDECRYPT FOR CAESARCIPHER TO WORK MOST OF THE TIME!!!!!
 Still should go ahead and package what's written there are a method that can be used in subCipher, just 
 more times (since tejas needs to do letter frequency analysis; i just need to cycle through 26 possible keys)
 
+jan 21, 2018:
+Alma: added brute force decryption to railfence cipher. to explain the lack of work this weekend: i was and 
+am really sick and couldn't work on this project
+Tejas: has been working on subCiper keyless
