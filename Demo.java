@@ -53,42 +53,48 @@ public class Demo {
           System.out.println("\t[4] Book Cipher");
           System.out.println("\t[5] Rail-Fence Cipher");
           System.out.println("\t[6] Autokey Cipher\n");
-          int type = in.nextInt();
+          String type = in.next();
           System.out.println("\nEnter your ciphertext: \n");
           in.nextLine();
           String pt = in.nextLine();
           System.out.print("\nPlaintext: ");
           switch (type) {
-              case 1:
+              case "1":
               try{
                 System.out.print(SubCipher.keyless(pt));
                 break;
               }catch(FileNotFoundException e){
                 System.out.println("problem with words1000.txt");
               }
-              case 2:
+              case "2":
               try{
                 System.out.print(CaesarCipher.keyless(pt));
                 break;
               }catch(FileNotFoundException e){
                 System.out.println("problem with words1000.txt");
               }
-              case 3: //System.out.print(VigenereCipher.keyless(pt));
+              case "3": //System.out.print(VigenereCipher.keyless(pt));
               break;
-              case 4: //System.out.print(BookCipher.keyless(pt));
+              case "4": //System.out.print(BookCipher.keyless(pt));
               break;
-              case 5:
+              case "5":
               try{
                 System.out.print(RailFenceCipher.keyless(pt));
                 break;
               }catch(FileNotFoundException e){
                 System.out.println("Problem with words1000.txt");
               }
-              case 6: //System.out.print(AutokeyCipher.keyless(pt));
+              case "6": //System.out.print(AutokeyCipher.keyless(pt));
               break;
+              case "exit":
+                quit("exitting program");
+                break;
               default: quit("Invalid cipher! QUITTING");
           }
           System.out.println();
+          break;
+        case "exit":
+          quit("exitting program");
           break;
         default:
           quit("Invalid selection! QUITTING");
@@ -111,6 +117,9 @@ public class Demo {
         preset.nextLine();
         System.out.println("Enter your ciphertext: ");
         System.out.println("\nPlaintext: " + toRun.decrypt(preset.nextLine()));
+        break;
+      case "exit":
+        quit("exitting program");
         break;
       default:
         quit("Invalid selection! QUITTING");
@@ -174,6 +183,10 @@ public class Demo {
         System.out.println("Select a keyword for this Autokey cipher!\n");
         preset.nextLine();
         util = new AutokeyCipher(preset.nextLine());
+        break;
+      case "exit":
+        util = new SubCipher(0);
+        quit("exitting program");
         break;
       default:
         util = new SubCipher(0);
