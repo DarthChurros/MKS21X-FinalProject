@@ -1,4 +1,16 @@
 # MKS21X-FinalProject
+~~~~~~~INSTRUCTIONS>
+Welcome to the WiiFitTrainers cipher suite.
+Please compile and run 'Demo.java'
+To exit program, type 'exit'. If not that, then ctrl+c to terminate the program.
+Be wary that only railfencecipher and caesarcipher have working keyless decryption.
+if you would like to use your own files for bookcipher, make sure to rename them so that they 
+are title in capslock. Also, when inputting which filed you are gonna use, do not include the
+'.txt' at the end.
+No files are written onto/created by this program. Nothing is saved upon exiting the program.
+Thank you for using our cipher suite.
+
+
 DAILY LOG:
 Jan 3rd, 2018:
 We created the repo today and also began two branches, one called ClassStructure by Tejas
