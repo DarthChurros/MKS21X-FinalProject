@@ -58,17 +58,17 @@ public abstract class Cipher {
   }
 
   public static boolean isText(String text) {
-    ArrayList<Integer> starts = new ArrayList<Integer>();
-    int last = 0;
-    starts.add(0);
-    while (starts.get(starts.size()-1) + last < text.length()) {
-      if (isWord(text.substring(starts.get(starts.size()-1),last))) {
-        System.out.println("start = " +  (starts.get(starts.size()-1)) + ", end = " + last);
-        System.out.println(text.substring(starts.get(starts.size()-1),last) + " is a word");
-        starts.add(last);
+    ArrayList<String> words = new ArrayList<String>();
+    words.add(text);
+    for (int i = 0; i < text.length(); i++) {
+      if (isWord(words.get(words.length()).substring(0,i))) {
+        words.add(0,words.get(words.length()).substring(0,i));
+      } else if (i == text.length() - 1) {
+        i -= words.get(words.length() - 1).length();
+        words.remove(words.length()-1);
       }
-      last++;
     }
+
     return false;
   }
 }
