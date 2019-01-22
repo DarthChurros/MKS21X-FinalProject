@@ -87,7 +87,7 @@ public class Demo {
               case "6": //System.out.print(AutokeyCipher.keyless(pt));
               break;
               case "exit":
-                quit("exitting program");
+                quit("exiting program");
                 break;
               default: quit("Invalid cipher! QUITTING");
           }
