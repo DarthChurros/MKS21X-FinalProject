@@ -88,4 +88,4 @@ jan 21, 2018:
 Alma: added brute force decryption to railfence cipher. to explain the lack of work this weekend: i was and 
 am really sick and couldn't work on this project
 Tejas: has been working on subCiper keyless, incorporated working isText()
-into CaesarCipher, updated words list
+into CaesarCipher and railfence, updated words list
