@@ -57,18 +57,18 @@ public class Demo {
           System.out.println("\nEnter your ciphertext: \n");
           in.nextLine();
           String pt = in.nextLine();
-          System.out.print("\nPlaintext: ");
+          String ans = "KEYLESS DECRYPTION NOT IMPLEMENTED FOR THIS CIPHER";
           switch (type) {
               case "1":
               try{
-                System.out.print(SubCipher.keyless(pt));
+                ans = SubCipher.keyless(pt);
                 break;
               }catch(FileNotFoundException e){
                 System.out.println("problem with words1000.txt");
               }
               case "2":
               try{
-                System.out.print(CaesarCipher.keyless(pt));
+                ans = CaesarCipher.keyless(pt);
                 break;
               }catch(FileNotFoundException e){
                 System.out.println("problem with words1000.txt");
@@ -79,7 +79,7 @@ public class Demo {
               break;
               case "5":
               try{
-                System.out.print(RailFenceCipher.keyless(pt));
+                ans = RailFenceCipher.keyless(pt);
                 break;
               }catch(FileNotFoundException e){
                 System.out.println("Problem with words1000.txt");
@@ -91,10 +91,11 @@ public class Demo {
                 break;
               default: quit("Invalid cipher! QUITTING");
           }
+          System.out.print("\nPlaintext: " + ans);
           System.out.println();
           break;
         case "exit":
-          quit("exitting program");
+          quit("exiting program");
           break;
         default:
           quit("Invalid selection! QUITTING");
