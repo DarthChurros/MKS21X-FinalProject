@@ -19,6 +19,7 @@ public class Demo {
       System.out.println("\t[1] Add a cipher");
       System.out.println("\t[2] Remove a cipher");
       System.out.println("\t[3] Run a cipher");
+      System.out.println("\t[4] Run keyless decryption (EXPERIMENTAL)");
 
       switch (in.next()) {
         case "1":
@@ -44,6 +45,57 @@ public class Demo {
           System.out.println("\nRunning " + ciphers.get(toRun) + "\n");
           runCipher(ciphers.get(toRun), in);
           break;
+        case "4":
+          System.out.println("\nOn which cipher would you like to attempt decryption?");
+          System.out.println("\t[1] Substitution Cipher");
+          System.out.println("\t[2] Caesar Cipher");
+          System.out.println("\t[3] Vigenere Cipher");
+          System.out.println("\t[4] Book Cipher");
+          System.out.println("\t[5] Rail-Fence Cipher");
+          System.out.println("\t[6] Autokey Cipher\n");
+          String type = in.next();
+          System.out.println("\nEnter your ciphertext: \n");
+          in.nextLine();
+          String pt = in.nextLine();
+          System.out.print("\nPlaintext: ");
+          switch (type) {
+              case "1":
+              try{
+                System.out.print(SubCipher.keyless(pt));
+                break;
+              }catch(FileNotFoundException e){
+                System.out.println("problem with words1000.txt");
+              }
+              case "2":
+              try{
+                System.out.print(CaesarCipher.keyless(pt));
+                break;
+              }catch(FileNotFoundException e){
+                System.out.println("problem with words1000.txt");
+              }
+              case "3": //System.out.print(VigenereCipher.keyless(pt));
+              break;
+              case "4": //System.out.print(BookCipher.keyless(pt));
+              break;
+              case "5":
+              try{
+                System.out.print(RailFenceCipher.keyless(pt));
+                break;
+              }catch(FileNotFoundException e){
+                System.out.println("Problem with words1000.txt");
+              }
+              case "6": //System.out.print(AutokeyCipher.keyless(pt));
+              break;
+              case "exit":
+                quit("exitting program");
+                break;
+              default: quit("Invalid cipher! QUITTING");
+          }
+          System.out.println();
+          break;
+        case "exit":
+          quit("exitting program");
+          break;
         default:
           quit("Invalid selection! QUITTING");
       }
@@ -65,6 +117,9 @@ public class Demo {
         preset.nextLine();
         System.out.println("Enter your ciphertext: ");
         System.out.println("\nPlaintext: " + toRun.decrypt(preset.nextLine()));
+        break;
+      case "exit":
+        quit("exitting program");
         break;
       default:
         quit("Invalid selection! QUITTING");
@@ -118,7 +173,7 @@ public class Demo {
           quit("input a int please! QUITTING");
         }
       case "5":
-        System.out.println("\nSelect the height of your fence  (int) and specify the text to encrypt for the RailFenceCipher!\n");
+        System.out.println("\nSelect the height of your fence  (int) and specify the text to encrypt for the RailFenceCipher! (on seperate lines please)\n");
         String a = preset.next();
         preset.nextLine();
         String b = preset.nextLine();
@@ -128,6 +183,10 @@ public class Demo {
         System.out.println("Select a keyword for this Autokey cipher!\n");
         preset.nextLine();
         util = new AutokeyCipher(preset.nextLine());
+        break;
+      case "exit":
+        util = new SubCipher(0);
+        quit("exitting program");
         break;
       default:
         util = new SubCipher(0);
